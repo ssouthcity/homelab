@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+spec:
+  replicas: 1
+  template:
+    spec:
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: prowlarr-pvc
+      containers: 
+      - name: prowlarr
+        image: lscr.io/linuxserver/prowlarr:latest
+        envFrom:
+        - configMapRef:
+            name: prowlarr-conf
+        ports:
+        - containerPort: 9696
+        volumeMounts:
+        - name: config
+          mountPath: /config

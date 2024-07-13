@@ -20,6 +20,7 @@
             terraform
             terraform-providers.kubernetes
             kubectl
+            k9s
           ];
         };
       });
