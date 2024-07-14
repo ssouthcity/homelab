@@ -7,3 +7,4 @@ resources:
 - ./namespace.yml
 - ./prowlarr
 - ./sonarr
+- ./qbittorrent

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+spec:
+  type: LoadBalancer
+  ports: 
+  - name: webui
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+  - name: torrent
+    protocol: TCP
+    port: 6881
+    targetPort: 6881

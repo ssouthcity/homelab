@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      # - name: gluetun
+      #   image: ghcr.io/qdm12/gluetun
+      #   securityContext:
+      #     capabilities:
+      #       add: ["NET_ADMIN"]
+      #   envFrom:
+      #   - secretRef:
+      #       name: gluetun-secrets
+      #   volumeMounts:
+      #   - name: gluetun
+      #     mountPath: /gluetun
+      - name: qbittorrent
+        image: lscr.io/linuxserver/qbittorrent
+        envFrom:
+        - configMapRef:
+            name: qbittorrent-conf
+        volumeMounts:
+        - name: qbittorrent-data
+          mountPath: /config
+        - name: downloads
+          mountPath: /downloads
+        ports:
+        - containerPort: 8080
+        - containerPort: 6881
+      volumes:
+      - name: gluetun
+        persistentVolumeClaim:
+          claimName: gluetun-pvc
+      - name: qbittorrent-data
+        persistentVolumeClaim:
+          claimName: qbittorrent-pvc
+      - name: downloads
+        hostPath:
+          path: /media/torrents/downloads
+          type: Directory
