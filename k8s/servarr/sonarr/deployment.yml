@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: sonarr
+        image: lscr.io/linuxserver/sonarr:latest
+        envFrom:
+        - configMapRef:
+            name: sonarr-conf
+        ports:
+        - containerPort: 8989
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: tv
+          mountPath: /tv
+        - name: downloads
+          mountPath: /downloads
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: sonarr-pvc
+        - name: tv
+          hostPath:
+            path: /media/library/tv
+            type: Directory
+        - name: import
+          hostPath:
+            path: /media/library/import/tv
+            type: Directory
+        - name: downloads
+          hostPath:
+            path: /media/torrents/downloads
+            type: Directory

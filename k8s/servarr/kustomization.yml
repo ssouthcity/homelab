@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: servarr
 
 resources:
-  - ./namespace.yml
-  - ./prowlarr
+- ./namespace.yml
+- ./prowlarr
+- ./sonarr
