@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers: 
+      - name: jellyfin
+        image: lscr.io/linuxserver/jellyfin
+        envFrom:
+        - configMapRef:
+            name: jellyfin-conf
+        ports:
+        - name: web
+          containerPort: 8096
+        - name: local-discovery
+          containerPort: 7359
+        - name: dlna
+          containerPort: 1900
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: movies
+          mountPath: /data/movies
+        - name: tv
+          mountPath: /data/tvshows
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: jellyfin-pvc
+      - name: movies
+        hostPath:
+          path: /media/library/movies
+          type: Directory
+      - name: tv
+        hostPath:
+          path: /media/library/tv
+          type: Directory
