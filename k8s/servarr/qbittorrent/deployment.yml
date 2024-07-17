@@ -6,18 +6,20 @@ spec:
   replicas: 1
   template:
     spec:
+      initContainers:
+      - name: gluetun
+        image: qmcgaw/gluetun
+        restartPolicy: Always
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        envFrom:
+        - secretRef:
+            name: gluetun-secrets
+        volumeMounts:
+        - name: gluetun
+          mountPath: /gluetun
       containers:
-      # - name: gluetun
-      #   image: ghcr.io/qdm12/gluetun
-      #   securityContext:
-      #     capabilities:
-      #       add: ["NET_ADMIN"]
-      #   envFrom:
-      #   - secretRef:
-      #       name: gluetun-secrets
-      #   volumeMounts:
-      #   - name: gluetun
-      #     mountPath: /gluetun
       - name: qbittorrent
         image: lscr.io/linuxserver/qbittorrent
         envFrom:
@@ -30,7 +32,6 @@ spec:
           mountPath: /downloads
         ports:
         - containerPort: 8080
-        - containerPort: 6881
       volumes:
       - name: gluetun
         persistentVolumeClaim:
