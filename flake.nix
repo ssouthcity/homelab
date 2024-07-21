@@ -17,8 +17,10 @@
       {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [ 
-            kubectl
+            k3sup
             k9s
+            kubectl
+            kubernetes-helm
           ];
         };
       });
