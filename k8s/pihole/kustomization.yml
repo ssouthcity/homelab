@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: pihole
+
+commonLabels:
+  app: pihole
+
+resources:
+- ./deployment.yml
+- ./namespace.yml
+- ./pvc.yml
+- ./service.yml
+
+images:
+- name: pihole
+  newTag: 2024.07.0 
+
+secretGenerator:
+- name: pihole-secret
+  envs:
+  - .env
