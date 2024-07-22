@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: wireguard
+
+commonLabels:
+  app: wireguard
+
+resources:
+- ./deployment.yml
+- ./namespace.yml
+- ./pvc.yml
+- ./service.yml
+
+images:
+- name: lscr.io/linuxserver/wireguard
+  newTag: v1.0.20210914-ls126
+
+secretGenerator:
+- name: wireguard-secret
+  envs:
+  - .env

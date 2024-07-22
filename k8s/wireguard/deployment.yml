@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wireguard
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers: 
+      - name: wireguard
+        image: lscr.io/linuxserver/wireguard
+        securityContext:
+          privileged: true
+          capabilities:
+            add: 
+            - NET_ADMIN
+            - SYS_MODULE
+          sysctls:
+          - name: net.ipv4.ip_forward
+            value: 1
+          - name: net.ipv4.conf.all.forwarding
+            value: 1
+        envFrom:
+        - secretRef:
+            name: wireguard-secret
+        volumeMounts:
+        - name: data
+          mountPath: /config
+        - name: modules
+          mountPath: /lib/modules
+        ports:
+        - name: wireguard
+          protocol: UDP
+          containerPort: 51820
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: wireguard-data-pvc
+      - name: modules
+        persistentVolumeClaim:
+          claimName: wireguard-modules-pvc
