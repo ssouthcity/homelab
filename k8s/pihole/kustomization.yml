@@ -7,7 +7,9 @@ commonLabels:
   app: pihole
 
 resources:
+- ./configmap-dnsmasq.yml
 - ./deployment.yml
+- ./ingress.yml
 - ./namespace.yml
 - ./pvc.yml
 - ./service.yml

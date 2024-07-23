@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pihole-conf-dnsmasq
+data:
+  02-homelab-wildcard-dns.conf: |
+    address=/.homelab/192.168.10.161

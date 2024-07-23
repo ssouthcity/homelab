@@ -22,5 +22,5 @@ spec:
         persistentVolumeClaim:
           claimName: pihole-data-pvc
       - name: dns
-        persistentVolumeClaim:
-          claimName: pihole-dns-pvc
+        configMap:
+          name: pihole-conf-dnsmasq
