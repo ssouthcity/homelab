@@ -9,26 +9,9 @@ spec:
       containers: 
       - name: pihole
         image: pihole/pihole
-        # Uncomment if using as DHCP
-        # securityContext:
-        #   capabilities:
-        #     add: [ "NET_ADMIN" ]
         envFrom:
         - secretRef:
             name: pihole-secret
-        ports:
-        - name: dns-tcp
-          protocol: TCP
-          containerPort: 53
-        - name: dns-udp
-          protocol: UDP
-          containerPort: 53
-        # - name: dhcp
-        #   protocol: UDP
-        #   containerPort: 67
-        - name: web-ui
-          protocol: TCP
-          containerPort: 80
         volumeMounts:
         - name: data
           mountPath: /etc/pihole
