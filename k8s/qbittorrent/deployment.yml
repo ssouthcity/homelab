@@ -12,7 +12,8 @@ spec:
         restartPolicy: Always
         securityContext:
           capabilities:
-            add: ["NET_ADMIN"]
+            add:
+            - NET_ADMIN
         envFrom:
         - secretRef:
             name: gluetun-secrets
@@ -26,20 +27,20 @@ spec:
         - configMapRef:
             name: qbittorrent-conf
         volumeMounts:
-        - name: qbittorrent-data
+        - name: qbittorrent
           mountPath: /config
         - name: downloads
           mountPath: /downloads
         ports:
-        - containerPort: 8080
+        - containerPort: 80
       volumes:
       - name: gluetun
         persistentVolumeClaim:
-          claimName: gluetun-pvc
-      - name: qbittorrent-data
+          claimName: gluetun-data-pvc
+      - name: qbittorrent
         persistentVolumeClaim:
-          claimName: qbittorrent-pvc
+          claimName: qbittorrent-data-pvc
       - name: downloads
         hostPath:
-          path: /media/torrents/downloads
+          path: /mnt/ssd1/torrents/downloads
           type: Directory

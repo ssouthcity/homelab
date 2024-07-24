@@ -1,8 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: qbittorrent
+
 commonLabels:
-  servar.app: qbittorrent
+  servarr.app: qbittorrent
 
 configMapGenerator:
 - name: qbittorrent-conf
@@ -10,14 +12,22 @@ configMapGenerator:
   - PUID=1057
   - PGID=1056
   - TZ=Europe/Oslo
-  - WEBUI_PORT=8080
+  - WEBUI_PORT=80
   - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod
 
 secretGenerator:
 - name: gluetun-secrets
   env: .env
 
+images:
+- name: lscr.io/linuxserver/qbittorrent
+  newTag: 4.6.5-r0-ls342
+- name: qmcgaw/gluetun
+  newTag: v3
+
 resources:
-- pvc.yml
-- deployment.yml
-- service.yml
+- ./deployment.yml
+- ./ingress.yml
+- ./namespace.yml
+- ./pvc.yml
+- ./service.yml

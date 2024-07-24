@@ -9,10 +9,10 @@ spec:
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: prowlarr-pvc
+          claimName: prowlarr-data-pvc
       containers: 
       - name: prowlarr
-        image: lscr.io/linuxserver/prowlarr:latest
+        image: lscr.io/linuxserver/prowlarr
         envFrom:
         - configMapRef:
             name: prowlarr-conf

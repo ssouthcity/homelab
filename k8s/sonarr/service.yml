@@ -3,8 +3,8 @@ kind: Service
 metadata:
   name: sonarr
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports: 
   - protocol: TCP
-    port: 8989
+    port: 80
     targetPort: 8989

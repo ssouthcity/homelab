@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: gluetun-pvc
+  name: gluetun-data-pvc
 spec:
   storageClassName: local-path
   accessModes:
@@ -13,7 +13,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: qbittorrent-pvc
+  name: qbittorrent-data-pvc
 spec:
   storageClassName: local-path
   accessModes:

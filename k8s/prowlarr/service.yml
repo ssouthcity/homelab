@@ -3,8 +3,8 @@ kind: Service
 metadata:
   name: prowlarr
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports: 
   - protocol: TCP
-    port: 9696
+    port: 80
     targetPort: 9696

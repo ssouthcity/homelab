@@ -1,8 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: sonarr
+
 commonLabels:
-  servar.app: sonarr
+  servarr.app: sonarr
 
 configMapGenerator:
 - name: sonarr-conf
@@ -11,7 +13,13 @@ configMapGenerator:
   - PGID=1000
   - TZ=Europe/Oslo
 
+images:
+- name: lscr.io/linuxserver/sonarr
+  newTag: 4.0.8
+
 resources:
-- pvc.yml
-- deployment.yml
-- service.yml
+- ./deployment.yml
+- ./ingress.yml
+- ./namespace.yml
+- ./pvc.yml
+- ./service.yml

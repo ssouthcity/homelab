@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: jellyfin-web
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports: 
   - name: web
     protocol: TCP
-    port: 8096
-    targetPort: web
+    port: 80
+    targetPort: 8096
 ---
 apiVersion: v1
 kind: Service

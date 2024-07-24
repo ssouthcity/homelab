@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: jellyfin-pvc
+  name: jellyfin-data-pvc
 spec:
   storageClassName: local-path
   accessModes:

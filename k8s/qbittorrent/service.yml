@@ -3,12 +3,14 @@ kind: Service
 metadata:
   name: qbittorrent
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports: 
+
   - name: webui
     protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 80
+    targetPort: 80
+
   - name: torrent
     protocol: TCP
     port: 6881
