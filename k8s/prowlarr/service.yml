@@ -5,6 +5,12 @@ metadata:
 spec:
   type: ClusterIP
   ports: 
-  - protocol: TCP
+  - name: prowlarr
+    protocol: TCP
     port: 80
     targetPort: 9696
+
+  - name: flaresolverr
+    protocol: TCP
+    port: 8191
+    targetPort: 8191

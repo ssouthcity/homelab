@@ -10,7 +10,11 @@ spec:
       - name: config
         persistentVolumeClaim:
           claimName: prowlarr-data-pvc
+      - name: flaresolverr-data
+        persistentVolumeClaim:
+          claimName: flaresolverr-data-pvc
       containers: 
+
       - name: prowlarr
         image: lscr.io/linuxserver/prowlarr
         envFrom:
@@ -21,3 +25,11 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
+
+      - name: flaresolverr
+        image: ghcr.io/flaresolverr/flaresolverr
+        envFrom:
+        - configMapRef:
+            name: flaresolverr-conf
+        ports:
+        - containerPort: 8191
