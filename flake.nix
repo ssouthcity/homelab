@@ -18,10 +18,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [ 
             ansible
-            k3sup
-            k9s
             kubectl
-            kubernetes-helm
           ];
         };
       });
