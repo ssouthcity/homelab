@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager-release
+  namespace: cert-manager
+spec:
+  chart:
+    spec:
+      chart: cert-manager
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: cert-manager-repo
+      version: v1.15.2
+  values:
+    installCRDs: true
+  interval: 1m0s
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager-webhook-vercel-release
+  namespace: cert-manager
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: deploy/cert-manager-webhook-vercel
+      sourceRef:
+        kind: GitRepository
+        name: cert-manager-webhook-vercel-repo
+      version: 1.0.0
+  values:
+    groupName: acme.rhythmbhiwani.in
+    certManager:
+      namespace: cert-manager
+      serviceAccountName: cert-manager-release

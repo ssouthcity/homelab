@@ -4,10 +4,17 @@ kind: Ingress
 metadata:
   name: longhorn-ingress
   namespace: longhorn-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - '*.home.southcity.dev'
+    secretName: longhorn-cert
   rules:
-  - http:
+  - host: longhorn.home.southcity.dev
+    http:
       paths:
       - pathType: Prefix
         path: /
