@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
 - longhorn-system
 - metallb-system
+- ingress-nginx
