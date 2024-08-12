@@ -11,6 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./controllers
+  path: ./clusters/homelab/ingress-nginx/controllers
   prune: true
   wait: true
