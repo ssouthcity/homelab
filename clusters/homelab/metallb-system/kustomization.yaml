@@ -1,9 +1,34 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
-
-resources:
-- namespace.yaml
-- helmrepo.yaml
-- helmrelease.yaml
-- ipaddresspool.yaml
-- l2advertisement.yaml
+metadata:
+  name: metallb-controllers
+  namespace: flux-system
+spec:
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./controllers
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb-configs
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: metallb-controllers
+  interval: 5m
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./configs
+  prune: true
