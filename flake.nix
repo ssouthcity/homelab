@@ -21,6 +21,8 @@
             k9s
             kubectl
             fluxcd
+            gnupg
+            sops
           ];
         };
       });
