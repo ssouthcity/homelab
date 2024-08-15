@@ -1,14 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prowlarr
+  name: prowlarr-ingress
+  namespace: prowlarr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
+  tls:
+  - hosts:
+    - '*.home.southcity.dev'
+    secretName: prowlarr-cert
   rules:
-  - host: prowlarr.homelab
+  - host: prowlarr.home.southcity.dev
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - pathType: Prefix
+        path: /
         backend:
           service:
             name: prowlarr
