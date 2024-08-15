@@ -92,35 +92,34 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infra-controllers
+  name: longhorn-controller
   namespace: flux-system
 spec:
-  dependsOn:
-  - name: metallb-config
-  - name: cert-manager-config
   interval: 1h
   retryInterval: 1m
   timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/controllers
+  path: ./infrastructure/longhorn-system/controller
   prune: true
   wait: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infra-configs
+  name: longhorn-ui
   namespace: flux-system
 spec:
   dependsOn:
-  - name: infra-controllers
+  - name: longhorn-controller
+  - name: cert-manager-config
+  - name: metallb-config
   interval: 1h
   retryInterval: 1m
   timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/configs
+  path: ./infrastructure/longhorn-system/ui
   prune: true
