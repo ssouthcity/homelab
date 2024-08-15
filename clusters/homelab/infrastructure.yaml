@@ -36,7 +36,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cert-manager
+  name: cert-manager-controller
   namespace: flux-system
 spec:
   interval: 1h
@@ -45,7 +45,47 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/cert-manager
+  path: ./infrastructure/cert-manager/controller
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cert-manager-webhook
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cert-manager-controller
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/cert-manager/webhook
+  prune: true
+  wait: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cert-manager-config
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: cert-manager-webhook
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/cert-manager/config
   prune: true
   wait: true
 ---
@@ -57,7 +97,7 @@ metadata:
 spec:
   dependsOn:
   - name: metallb-config
-  - name: cert-manager
+  - name: cert-manager-config
   interval: 1h
   retryInterval: 1m
   timeout: 5m
