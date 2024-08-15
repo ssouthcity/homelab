@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+spec:
+  replicas: 1
+  template:
+    spec:
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: prowlarr-data-pvc
+      - name: flaresolverr-data
+        persistentVolumeClaim:
+          claimName: flaresolverr-data-pvc
+      containers: 
+
+      - name: prowlarr
+        image: lscr.io/linuxserver/prowlarr
+        envFrom:
+        - configMapRef:
+            name: prowlarr-conf
+        ports:
+        - containerPort: 9696
+        volumeMounts:
+        - name: config
+          mountPath: /config
+
+      - name: flaresolverr
+        image: ghcr.io/flaresolverr/flaresolverr
+        envFrom:
+        - configMapRef:
+            name: flaresolverr-conf
+        ports:
+        - containerPort: 8191
