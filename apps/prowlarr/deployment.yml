@@ -3,9 +3,17 @@ kind: Deployment
 metadata:
   name: prowlarr
   namespace: prowlarr
+  labels:
+    app: prowlarr
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
   template:
+    metadata:
+      labels:
+        app: prowlarr
     spec:
       volumes:
       - name: prowlarr-data
