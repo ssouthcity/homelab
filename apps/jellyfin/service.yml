@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  type: ClusterIP
+  ports: 
+  - name: web
+    protocol: TCP
+    port: 8096
+    targetPort: web
+
+  - name: local-discovery
+    protocol: TCP
+    port: 7359
+    targetPort: local-discovery
+
+  - name: dlna
+    protocol: TCP
+    port: 1900
+    targetPort: dlna
