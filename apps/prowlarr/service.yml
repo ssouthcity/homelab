@@ -5,6 +5,8 @@ metadata:
   namespace: prowlarr
 spec:
   type: ClusterIP
+  selector:
+    app: prowlarr
   ports: 
   - name: prowlarr
     protocol: TCP

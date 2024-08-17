@@ -5,6 +5,8 @@ metadata:
   namespace: sonarr
 spec:
   type: ClusterIP
+  selector:
+    app: sonarr
   ports: 
   - name: web
     protocol: TCP
