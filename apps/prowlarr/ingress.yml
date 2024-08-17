@@ -20,4 +20,4 @@ spec:
           service:
             name: prowlarr
             port:
-              number: 9696
+              name: prowlarr
