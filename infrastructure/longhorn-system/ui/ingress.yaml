@@ -8,7 +8,7 @@ metadata:
 spec:
   tls:
   - hosts:
-    - '*.home.southcity.dev'
+    - 'longhorn.home.southcity.dev'
     secretName: longhorn-cert
   rules:
   - host: longhorn.home.southcity.dev

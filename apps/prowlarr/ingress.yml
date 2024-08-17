@@ -8,7 +8,7 @@ metadata:
 spec:
   tls:
   - hosts:
-    - '*.home.southcity.dev'
+    - 'prowlarr.home.southcity.dev'
     secretName: prowlarr-cert
   rules:
   - host: prowlarr.home.southcity.dev

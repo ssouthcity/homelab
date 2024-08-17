@@ -8,7 +8,7 @@ metadata:
 spec:
   tls:
   - hosts:
-    - '*.home.southcity.dev'
+    - 'sonarr.home.southcity.dev'
     secretName: sonarr-cert
   rules:
   - host: sonarr.home.southcity.dev
