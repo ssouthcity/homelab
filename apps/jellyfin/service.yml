@@ -5,6 +5,8 @@ metadata:
   namespace: jellyfin
 spec:
   type: ClusterIP
+  selector:
+    app: jellyfin
   ports: 
   - name: web
     protocol: TCP
