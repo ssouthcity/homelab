@@ -28,9 +28,9 @@ spec:
         ports:
         - containerPort: 8989
         volumeMounts:
-        - name: config
+        - name: sonarr-data
           mountPath: /config
       volumes:
-        - name: config
+        - name: sonarr-data
           persistentVolumeClaim:
             claimName: sonarr-data-pvc
