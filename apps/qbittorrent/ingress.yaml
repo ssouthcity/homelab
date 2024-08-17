@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent-ingress
+  namespace: qbittorrent
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  tls:
+  - hosts:
+    - 'qbittorrent.home.southcity.dev'
+    secretName: qbittorrent-cert
+  rules:
+  - host: qbittorrent.home.southcity.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: qbittorrent
+            port:
+              name: web
