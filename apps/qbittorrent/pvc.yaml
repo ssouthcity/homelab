@@ -14,6 +14,20 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: qbittorrent-downloads-pvc
+  namespace: qbittorrent
+spec:
+  storageClassName: longhorn
+  volumeName: longhorn-media
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: gluetun-data-pvc
   namespace: qbittorrent
 spec:
