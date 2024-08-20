@@ -48,8 +48,6 @@ spec:
         volumeMounts:
         - name: qbittorrent-data
           mountPath: /config
-        - name: qbittorrent-downloads
-          mountPath: /downloads
         ports:
         - name: webui
           containerPort: 8080
@@ -59,9 +57,6 @@ spec:
       - name: qbittorrent-data
         persistentVolumeClaim:
           claimName: qbittorrent-data-pvc
-      - name: qbittorrent-downloads
-        persistentVolumeClaim: 
-          claimName: qbittorrent-downloads-pvc
       - name: gluetun-data
         persistentVolumeClaim:
           claimName: gluetun-data-pvc
