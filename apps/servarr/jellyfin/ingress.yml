@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - 'jellyfin.home.southcity.dev'
-    secretName: prowlarr-cert
+    secretName: jellyfin-cert
   rules:
   - host: jellyfin.home.southcity.dev
     http:
