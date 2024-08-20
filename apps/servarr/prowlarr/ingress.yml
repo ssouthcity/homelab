@@ -1,23 +1,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: qbittorrent-ingress
-  namespace: qbittorrent
+  name: prowlarr-ingress
+  namespace: servarr
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   tls:
   - hosts:
-    - 'qbittorrent.home.southcity.dev'
-    secretName: qbittorrent-cert
+    - 'prowlarr.home.southcity.dev'
+    secretName: prowlarr-cert
   rules:
-  - host: qbittorrent.home.southcity.dev
+  - host: prowlarr.home.southcity.dev
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: qbittorrent
+            name: prowlarr
             port:
-              name: web
+              name: prowlarr

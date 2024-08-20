@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: jellyfin-data-pvc
-  namespace: jellyfin
+  name: sonarr-data-pvc
+  namespace: servarr
 spec:
   storageClassName: longhorn
-  accessModes:
+  accessModes: 
   - ReadWriteOnce
   resources:
     requests:

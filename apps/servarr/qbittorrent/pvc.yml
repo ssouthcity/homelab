@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: qbittorrent-data-pvc
-  namespace: qbittorrent
+  namespace: servarr
 spec:
   storageClassName: longhorn
   accessModes:

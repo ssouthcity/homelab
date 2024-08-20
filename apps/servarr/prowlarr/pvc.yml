@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: prowlarr-data-pvc
-  namespace: prowlarr
+  namespace: servarr
 spec:
   storageClassName: longhorn
   accessModes:
