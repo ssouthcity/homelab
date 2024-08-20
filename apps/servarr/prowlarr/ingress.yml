@@ -20,4 +20,4 @@ spec:
           service:
             name: prowlarr
             port:
-              name: prowlarr
+              name: web

@@ -8,7 +8,7 @@ spec:
   selector:
     app: prowlarr
   ports: 
-  - name: prowlarr
+  - name: web
     protocol: TCP
     port: 9696
     targetPort: 9696
