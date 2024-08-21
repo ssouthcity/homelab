@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duckdns
+  namespace: wireguard
+  labels:
+    app: duckdns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: duckdns
+  template:
+    metadata:
+      labels:
+        app: duckdns
+    spec:
+      containers:
+      - name: duckdns
+        image: lscr.io/linuxserver/duckdns
+        restartPolicy: Always
+        environment:
+        - name: PUID
+          value: '1000'
+        - name: PGID
+          value: '1000'
+        - name: TZ
+          value: Europe/Oslo
+        envFrom:
+        - secretRef:
+            name: duckdns-secrets
+        volumeMounts:
+        - name: duckdns-data
+          mountPath: /config
+      volumes:
+      - name: duckdns-data
+        persistentVolumeClaim:
+          claimName: duckdns-data-pvc
