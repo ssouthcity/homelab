@@ -18,7 +18,6 @@ spec:
       containers:
       - name: duckdns
         image: lscr.io/linuxserver/duckdns
-        restartPolicy: Always
         environment:
         - name: PUID
           value: '1000'
