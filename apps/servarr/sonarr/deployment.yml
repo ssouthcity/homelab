@@ -31,7 +31,6 @@ spec:
         - name: sonarr-data
           mountPath: /config
         - name: servarr
-          subPath: /data
           mountPath: /data
       volumes:
         - name: sonarr-data

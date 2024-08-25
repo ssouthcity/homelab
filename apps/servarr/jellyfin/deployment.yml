@@ -36,7 +36,7 @@ spec:
         - name: jellyfin-data
           mountPath: /config
         - name: servarr
-          subPath: /data/media
+          subPath: media
           mountPath: /data/media
       volumes:
       - name: jellyfin-data
