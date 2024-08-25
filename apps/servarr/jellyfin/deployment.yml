@@ -35,12 +35,13 @@ spec:
         volumeMounts:
         - name: jellyfin-data
           mountPath: /config
-        - name: tv
-          mountPath: /data/tvshows
+        - name: servarr
+          subPath: /data/media
+          mountPath: /data/media
       volumes:
       - name: jellyfin-data
         persistentVolumeClaim:
           claimName: jellyfin-data-pvc
-      - name: tv
+      - name: servarr
         persistentVolumeClaim:
-          claimName: tv
+          claimName: servarr

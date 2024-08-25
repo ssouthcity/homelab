@@ -30,17 +30,13 @@ spec:
         volumeMounts:
         - name: sonarr-data
           mountPath: /config
-        - name: downloads
-          mountPath: /downloads
-        - name: tv
-          mountPath: /tv
+        - name: servarr
+          subPath: /data
+          mountPath: /data
       volumes:
         - name: sonarr-data
           persistentVolumeClaim:
             claimName: sonarr-data-pvc
-        - name: downloads
+        - name: servarr
           persistentVolumeClaim:
-            claimName: downloads
-        - name: tv
-          persistentVolumeClaim:
-            claimName: tv
+            claimName: servarr

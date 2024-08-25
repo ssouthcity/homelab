@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: tv
+  name: servarr
   namespace: servarr
 spec:
   storageClassName: longhorn
@@ -9,17 +9,4 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 512Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: downloads
-  namespace: servarr
-spec:
-  storageClassName: longhorn
-  accessModes: 
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 512Gi
+      storage: 1Ti
