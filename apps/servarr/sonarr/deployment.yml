@@ -15,6 +15,13 @@ spec:
       labels:
         app: sonarr
     spec:
+      initContainers:
+      - name: create-dirs
+        image: busybox
+        command: ["/bin/sh", "-c", "/data/torrents/tv /data/media/tv"]
+        volumeMounts:
+        - name: servarr
+          mountPath: /data
       containers:
       - name: sonarr
         image: lscr.io/linuxserver/sonarr
