@@ -18,7 +18,7 @@ spec:
       initContainers:
       - name: create-dirs
         image: busybox
-        command: ["/bin/sh", "-c", "/data/torrents/tv /data/media/tv"]
+        command: ["/bin/sh", "-c", "mkdir -p /data/torrents/tv /data/media/tv"]
         volumeMounts:
         - name: servarr
           mountPath: /data
