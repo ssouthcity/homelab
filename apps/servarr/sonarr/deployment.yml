@@ -18,7 +18,7 @@ spec:
       initContainers:
       - name: create-dirs
         image: busybox
-        command: ["/bin/sh", "-c", "mkdir -p /data/torrents/tv /data/media/tv"]
+        command: ["/bin/sh", "-c", "mkdir -m 777 -p /data/torrents/tv /data/media/tv"]
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
