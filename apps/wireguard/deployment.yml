@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wireguard
+  namespace: wireguard
+  labels:
+    app: wireguard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wireguard
+  template:
+    metadata:
+      labels:
+        app: wireguard
+    spec:
+      containers:
+      - name: wireguard
+        image: lscr.io/linuxserver/wireguard
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - SYS_MODULE
+        environment:
+        - name: PUID
+          value: '1000'
+        - name: PGID
+          value: '1000'
+        - name: TZ
+          value: Europe/Oslo
+        - name: SERVER_URL
+          value: drobak.duckdns.org
+        - name: SERVER_PORT
+          value: '31820'
+        - name: PEERS
+          value: '1'
+        - name: ALLOWED_IPS
+          value: 192.168.10.160/28
+        - name: PERSISTENTKEEPALIVE_PEERS
+          value: all
+        volumeMounts:
+        - name: wireguard-data
+          mountPath: /config
+      volumes:
+      - name: wireguard-data
+        persistentVolumeClaim:
+          claimName: wireguard-data-pvc
