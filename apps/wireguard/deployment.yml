@@ -22,7 +22,6 @@ spec:
           capabilities:
             add:
             - NET_ADMIN
-            - SYS_MODULE
         environment:
         - name: PUID
           value: '1000'
@@ -35,7 +34,7 @@ spec:
         - name: SERVER_PORT
           value: '31820'
         - name: PEERS
-          value: '1'
+          value: 'phone'
         - name: ALLOWED_IPS
           value: 192.168.10.160/28
         - name: PERSISTENTKEEPALIVE_PEERS
