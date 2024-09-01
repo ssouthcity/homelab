@@ -22,7 +22,7 @@ spec:
           capabilities:
             add:
             - NET_ADMIN
-        environment:
+        env:
         - name: PUID
           value: '1000'
         - name: PGID

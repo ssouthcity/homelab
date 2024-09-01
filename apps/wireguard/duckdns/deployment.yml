@@ -18,7 +18,7 @@ spec:
       containers:
       - name: duckdns
         image: lscr.io/linuxserver/duckdns
-        environment:
+        env:
         - name: PUID
           value: '1000'
         - name: PGID
