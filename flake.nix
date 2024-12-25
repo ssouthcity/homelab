@@ -18,10 +18,11 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [ 
             ansible
-            k9s
-            kubectl
             fluxcd
             gnupg
+            k9s
+            kubectl
+            rpi-imager
             sops
           ];
         };
