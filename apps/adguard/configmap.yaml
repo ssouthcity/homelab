@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: adguard-config
+  name: adguard-conf
 data:
   AdGuardHome.yaml: |
     bind_host: 0.0.0.0
@@ -9,4 +9,3 @@ data:
     auth_name: "admin"
     auth_pass: "admin"
 ---
-
