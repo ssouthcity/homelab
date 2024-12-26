@@ -12,6 +12,15 @@ spec:
       labels:
         app: adguard
     spec:
+      initContainers:
+      - name: readonly-conf-workaround
+        image: busybox:1.32
+        command: ["cp", "/tmp/AdGuardHome.yaml", "/opt/adguardhome/conf/AdGuardHome.yaml"]
+        volumeMounts:
+        - name: adguard-conf
+          mountPath: /opt/adguardhome/conf
+        - name: adguard-conf-map
+          mountPath: /tmp
       containers:
       - name: adguard-home
         image: adguard/adguardhome:latest
@@ -30,7 +39,10 @@ spec:
       volumes:
       - name: adguard-data
         persistentVolumeClaim:
-          claimName: adguard-pvc
+          claimName: adguard-data-pvc
       - name: adguard-conf
+        persistentVolumeClaim:
+          claimName: adguard-conf-pvc
+      - name: adguard-conf-map
         configMap:
           name: adguard-conf
