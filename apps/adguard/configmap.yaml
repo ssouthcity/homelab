@@ -4,8 +4,447 @@ metadata:
   name: adguard-conf
 data:
   AdGuardHome.yaml: |
-    bind_host: 0.0.0.0
-    bind_port: 80
-    auth_name: "admin"
-    auth_pass: "admin123"
+    http:
+      pprof:
+        port: 6060
+        enabled: false
+      address: 0.0.0.0:80
+      session_ttl: 720h
+    users:
+      - name: admin
+        password: $2a$10$Xe99Vs9I3USNr61qOm2BhOpUiCdMoQBHc3UtNDKxAll.IhZaTACKG
+    auth_attempts: 5
+    block_auth_min: 15
+    http_proxy: ""
+    language: ""
+    theme: auto
+    dns:
+      bind_hosts:
+        - 0.0.0.0
+      port: 53
+      anonymize_client_ip: true
+      ratelimit: 0
+      ratelimit_subnet_len_ipv4: 24
+      ratelimit_subnet_len_ipv6: 56
+      ratelimit_whitelist: []
+      refuse_any: true
+      upstream_dns:
+        - https://dns.quad9.net/dns-query
+        - tls://dns.quad9.net
+      upstream_dns_file: ""
+      bootstrap_dns:
+        - 9.9.9.9
+        - 149.112.112.112
+        - 2620:fe::fe
+        - 2620:fe::9
+      fallback_dns: []
+      upstream_mode: parallel
+      fastest_timeout: 1s
+      allowed_clients: []
+      disallowed_clients: []
+      blocked_hosts:
+        - version.bind
+        - id.server
+        - hostname.bind
+      trusted_proxies:
+        - 127.0.0.0/8
+        - ::1/128
+      cache_size: 4194304
+      cache_ttl_min: 0
+      cache_ttl_max: 0
+      cache_optimistic: false
+      bogus_nxdomain: []
+      aaaa_disabled: false
+      enable_dnssec: true
+      edns_client_subnet:
+        custom_ip: ""
+        enabled: false
+        use_custom: false
+      max_goroutines: 300
+      handle_ddr: true
+      ipset: []
+      ipset_file: ""
+      bootstrap_prefer_ipv6: false
+      upstream_timeout: 10s
+      private_networks: []
+      use_private_ptr_resolvers: true
+      local_ptr_upstreams: []
+      use_dns64: false
+      dns64_prefixes: []
+      serve_http3: false
+      use_http3_upstreams: false
+      serve_plain_dns: true
+      hostsfile_enabled: true
+    tls:
+      enabled: false
+      server_name: ""
+      force_https: false
+      port_https: 443
+      port_dns_over_tls: 853
+      port_dns_over_quic: 853
+      port_dnscrypt: 0
+      dnscrypt_config_file: ""
+      allow_unencrypted_doh: false
+      certificate_chain: ""
+      private_key: ""
+      certificate_path: ""
+      private_key_path: ""
+      strict_sni_check: false
+    querylog:
+      dir_path: ""
+      ignored: []
+      interval: 720h
+      size_memory: 1000
+      enabled: true
+      file_enabled: true
+    statistics:
+      dir_path: ""
+      ignored: []
+      interval: 24h
+      enabled: true
+    filters:
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+        name: AdGuard DNS filter
+        id: 1
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
+        name: AdAway Default Blocklist
+        id: 2
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_59.txt
+        name: AdGuard DNS Popup Hosts filter
+        id: 1735175253
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_53.txt
+        name: AWAvenue Ads Rule
+        id: 1735175254
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_4.txt
+        name: Dan Pollock's List
+        id: 1735175255
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_27.txt
+        name: OISD Blocklist Big
+        id: 1735175256
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_3.txt
+        name: Peter Lowe's Blocklist
+        id: 1735175257
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_33.txt
+        name: Steven Black's List
+        id: 1735175258
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_49.txt
+        name: HaGeZi's Ultimate Blocklist
+        id: 1735175259
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_39.txt
+        name: Dandelion Sprout's Anti Push Notifications
+        id: 1735175260
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_6.txt
+        name: Dandelion Sprout's Game Console Adblock List
+        id: 1735175261
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_45.txt
+        name: HaGeZi's Allowlist Referral
+        id: 1735175262
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt
+        name: Malicious URL Blocklist (URLHaus)
+        id: 1735175263
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_7.txt
+        name: Perflyst and Dandelion Sprout's Smart-TV Blocklist
+        id: 1735175264
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_50.txt
+        name: uBlock₀ filters – Badware risks
+        id: 1735175265
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt
+        name: Phishing URL Blocklist (PhishTank and OpenPhish)
+        id: 1735175266
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt
+        name: The Big List of Hacked Malware Web Sites
+        id: 1735175267
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt
+        name: Dandelion Sprout's Anti-Malware List
+        id: 1735175268
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_31.txt
+        name: Stalkerware Indicators List
+        id: 1735175269
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_55.txt
+        name: HaGeZi's Badware Hoster Blocklist
+        id: 1735175270
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_42.txt
+        name: ShadowWhisperer's Malware List
+        id: 1735175271
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_54.txt
+        name: HaGeZi's DynDNS Blocklist
+        id: 1735175272
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_10.txt
+        name: Scam Blocklist by DurableNapkin
+        id: 1735175273
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_56.txt
+        name: HaGeZi's The World's Most Abused TLDs
+        id: 1735175274
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt
+        name: Phishing Army
+        id: 1735175275
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_44.txt
+        name: HaGeZi's Threat Intelligence Feeds
+        id: 1735175276
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_8.txt
+        name: NoCoin Filter List
+        id: 1735175277
+      - enabled: true
+        url: https://v.firebog.net/hosts/Admiral.txt
+        name: Admiral
+        id: 1735175278
+      - enabled: true
+        url: https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts
+        name: Ad Wars
+        id: 1735175279
+      - enabled: true
+        url: https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+        name: anudeepND's Blacklist
+        id: 1735175280
+      - enabled: true
+        url: https://badblock.celenity.dev/abp/badblock.txt
+        name: My BadBlock
+        id: 1735175281
+      - enabled: true
+        url: https://sysctl.org/cameleon/hosts
+        name: CAMELEON
+        id: 1735175282
+      - enabled: true
+        url: https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser
+        name: CoinBlocker
+        id: 1735175283
+      - enabled: true
+        url: https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt
+        name: DeveloperDan Ads & Tracking
+        id: 1735175284
+      - enabled: true
+        url: https://osint.digitalside.it/Threat-Intel/lists/latestdomains.txt
+        name: Digital Side Threat Intel
+        id: 1735175285
+      - enabled: true
+        url: https://divested.dev/hosts-domains-wildcards
+        name: Divested Combined Blocklist
+        id: 1735175286
+      - enabled: true
+        url: https://v.firebog.net/hosts/Easylist.txt
+        name: EasyList
+        id: 1735175287
+      - enabled: true
+        url: https://v.firebog.net/hosts/Easyprivacy.txt
+        name: EasyPrivacy
+        id: 1735175288
+      - enabled: true
+        url: https://raw.githubusercontent.com/fmhy/FMHYFilterlist/main/filterlist.txt
+        name: FMHY Unsafe sites filterlist - Plus
+        id: 1735175291
+      - enabled: true
+        url: https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt
+        name: FrogEye First Party Trackers
+        id: 1735175292
+      - enabled: true
+        url: https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh.txt
+        name: HaGeZi's Encrypted DNS Servers
+        id: 1735175293
+      - enabled: true
+        url: https://raw.githubusercontent.com/xRuffKez/NRD/main/lists/14-day/adblock/nrd-14day_adblock.txt
+        name: HaGeZi/xRuffKez's Newly Registered Domains (14 days)
+        id: 1735175294
+      - enabled: true
+        url: https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif-ips.txt
+        name: HaGeZi's Threat Intelligence Feeds - IPs
+        id: 1735175295
+      - enabled: true
+        url: https://hblock.molinero.dev/hosts_adblock.txt
+        name: hBlock
+        id: 1735175296
+      - enabled: true
+        url: https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
+        name: hostsVN
+        id: 1735175297
+      - enabled: true
+        url: https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
+        name: KADhosts
+        id: 1735175298
+      - enabled: true
+        url: https://raw.githubusercontent.com/stamparm/aux/master/maltrail-malware-domains.txt
+        name: Maltrail Malware Domains
+        id: 1735175299
+      - enabled: true
+        url: https://v.firebog.net/hosts/Prigent-Ads.txt
+        name: Prigent-Ads
+        id: 1735175300
+      - enabled: true
+        url: https://v.firebog.net/hosts/Prigent-Crypto.txt
+        name: Prigent-Crypto
+        id: 1735175301
+      - enabled: true
+        url: https://v.firebog.net/hosts/Prigent-Malware.txt
+        name: Prigent-Malware
+        id: 1735175302
+      - enabled: true
+        url: https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt
+        name: Quidsup NoTrack Malware Blocklist
+        id: 1735175303
+      - enabled: true
+        url: https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt
+        name: Quidsup NoTrack Tracker Blocklist
+        id: 1735175304
+      - enabled: true
+        url: https://v.firebog.net/hosts/RPiList-Malware.txt
+        name: RPiList-Malware
+        id: 1735175305
+      - enabled: true
+        url: https://v.firebog.net/hosts/RPiList-Phishing.txt
+        name: RPiList-Phishing
+        id: 1735175306
+      - enabled: true
+        url: https://raw.githubusercontent.com/Spam404/lists/master/adblock-list.txt
+        name: Spam404
+        id: 1735175307
+      - enabled: true
+        url: https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/cryptojacking/domains
+        name: Ut1 Cryptojacking Domains
+        id: 1735175308
+      - enabled: true
+        url: https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/malware/domains
+        name: Ut1 Malware Domains
+        id: 1735175309
+      - enabled: true
+        url: https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/phishing/domains
+        name: Ut1 Phishing Domains
+        id: 1735175310
+      - enabled: true
+        url: https://v.firebog.net/hosts/static/w3kbl.txt
+        name: WaLLy3K's Personal Blocklist
+        id: 1735175311
+    whitelist_filters:
+      - enabled: true
+        url: https://badblock.celenity.dev/abp/whitelist.txt
+        name: BadBlock Whitelist
+        id: 1735175312
+      - enabled: true
+        url: https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/whitelist-urlshortener.txt
+        name: HaGeZi's URL Shorteners
+        id: 1735175313
+    user_rules:
+      - '||adservice.google.*^$important'
+      - '||adsterra.com^$important'
+      - '||amplitude.com^$important'
+      - '||analytics.edgekey.net^$important'
+      - '||analytics.twitter.com^$important'
+      - '||app.adjust.*^$important'
+      - '||app.*.adjust.com^$important'
+      - '||app.appsflyer.com^$important'
+      - '||doubleclick.net^$important'
+      - '||googleadservices.com^$important'
+      - '||guce.advertising.com^$important'
+      - '||metric.gstatic.com^$important'
+      - '||mmstat.com^$important'
+      - '||statcounter.com^$important'
+    dhcp:
+      enabled: false
+      interface_name: ""
+      local_domain_name: lan
+      dhcpv4:
+        gateway_ip: ""
+        subnet_mask: ""
+        range_start: ""
+        range_end: ""
+        lease_duration: 86400
+        icmp_timeout_msec: 1000
+        options: []
+      dhcpv6:
+        range_start: ""
+        lease_duration: 86400
+        ra_slaac_only: false
+        ra_allow_slaac: false
+    filtering:
+      blocking_ipv4: ""
+      blocking_ipv6: ""
+      blocked_services:
+        schedule:
+          time_zone: UTC
+        ids:
+          - facebook
+          - instagram
+          - linkedin
+          - qq
+          - rakuten_viki
+          - snapchat
+          - spotify
+          - tiktok
+          - viber
+          - vk
+          - wechat
+          - whatsapp
+      protection_disabled_until: null
+      safe_search:
+        enabled: false
+        bing: true
+        duckduckgo: true
+        ecosia: true
+        google: true
+        pixabay: true
+        yandex: true
+        youtube: true
+      blocking_mode: default
+      parental_block_host: family-block.dns.adguard.com
+      safebrowsing_block_host: standard-block.dns.adguard.com
+      rewrites: []
+      safe_fs_patterns:
+        - /opt/adguardhome/work/userfilters/*
+      safebrowsing_cache_size: 1048576
+      safesearch_cache_size: 1048576
+      parental_cache_size: 1048576
+      cache_time: 30
+      filters_update_interval: 24
+      blocked_response_ttl: 10
+      filtering_enabled: true
+      parental_enabled: false
+      safebrowsing_enabled: false
+      protection_enabled: true
+    clients:
+      runtime_sources:
+        whois: true
+        arp: true
+        rdns: true
+        dhcp: true
+        hosts: true
+      persistent: []
+    log:
+      enabled: true
+      file: ""
+      max_backups: 0
+      max_size: 100
+      max_age: 3
+      compress: false
+      local_time: false
+      verbose: false
+    os:
+      group: ""
+      user: ""
+      rlimit_nofile: 0
+    schema_version: 29
 ---
