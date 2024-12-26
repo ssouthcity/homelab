@@ -5,7 +5,7 @@ metadata:
 data:
   AdGuardHome.yaml: |
     bind_host: 0.0.0.0
-    bind_port: 3000
+    bind_port: 80
     auth_name: "admin"
     auth_pass: "admin"
 ---
