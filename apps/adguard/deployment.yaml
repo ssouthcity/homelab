@@ -15,12 +15,6 @@ spec:
       containers:
       - name: adguard-home
         image: adguard/adguardhome:latest
-        env:
-        - name: AGH_CONFIG
-          valueFrom:
-            configMapKeyRef:
-              name: adguard-config
-              key: AdGuardHome.yaml
         ports:
         - containerPort: 53
           name: dns
@@ -28,12 +22,15 @@ spec:
         - containerPort: 80
           name: web
           protocol: TCP
-        - containerPort: 3000 #initial setup
-          name: http-initial
         volumeMounts:
         - name: adguard-data
           mountPath: /opt/adguardhome/work
+        - name: adguard-conf
+          mountPath: /opt/adguardhome/conf
       volumes:
       - name: adguard-data
         persistentVolumeClaim:
           claimName: adguard-pvc
+      - name: adguard-conf
+        configMap:
+          name: adguard-conf
