@@ -17,9 +17,9 @@
       {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [ 
+            age
             ansible
             fluxcd
-            gnupg
             k9s
             kubectl
             rpi-imager

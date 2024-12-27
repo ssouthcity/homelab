@@ -1,0 +1,7 @@
+stores:
+  yaml:
+    indent: 2
+
+creation_rules:
+- encrypted_regex: '^(data|stringData)$'
+  age: age17dhlnu9e4p3lmuacnaecg0vsrtj35ant2qvzwv97vy7sq0yhcq8szcttv6
