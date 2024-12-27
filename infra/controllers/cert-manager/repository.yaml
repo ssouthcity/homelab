@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cert-manager-charts
+spec:
+  interval: 120m0s
+  url: https://charts.jetstack.io
