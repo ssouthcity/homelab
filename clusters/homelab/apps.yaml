@@ -17,3 +17,10 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+  patches:
+  - patch: |-
+      - op: add
+        path: /metadata/annotations/cert-manager.io~1cluster-issuer
+        value: letsencrypt
+    target:
+      kind: Ingress
