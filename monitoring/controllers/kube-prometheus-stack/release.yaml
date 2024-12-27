@@ -43,10 +43,10 @@ spec:
       ingress:
         enabled: true
         hosts:
-        - monitor.home.southcity.dev
+        - grafana.home.southcity.dev
         tls:
-        - secretName: monitor-cert
+        - secretName: grafana-cert
           hosts:
-          - monitor.home.southcity.dev
+          - grafana.home.southcity.dev
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
