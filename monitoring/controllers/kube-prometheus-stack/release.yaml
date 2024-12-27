@@ -43,6 +43,6 @@ spec:
     ingress:
       enabled: true
       hosts:
-      - monitoring.home.southcity.dev
+      - monitor.home.southcity.dev
       paths:
       - /
