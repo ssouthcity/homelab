@@ -9,7 +9,7 @@ spec:
       chart: deploy/cert-manager-webhook-vercel
       sourceRef:
         kind: GitRepository
-        name: cert-manager-webhook-vercel-repo
+        name: cert-manager-webhook-vercel-charts
       version: 1.x
   values:
     groupName: acme.southcity.dev
