@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - adguard.southcity.dev
+    - adguard.home.southcity.dev
     secretName: adguard-cert
   rules:
-  - host: adguard.southcity.dev
+  - host: adguard.home.southcity.dev
     http:
       paths:
       - path: /
