@@ -7,7 +7,3 @@ resources:
   - pvc.yaml
   - service.yaml
   - configmap.yaml
-decryption:
-  provider: sops
-  secretRef:
-    name: sops-age
