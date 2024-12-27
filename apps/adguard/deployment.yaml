@@ -19,7 +19,7 @@ spec:
         volumeMounts:
         - name: adguard-conf
           mountPath: /opt/adguardhome/conf
-        - name: adguard-conf-secret
+        - name: adguard-conf-map
           mountPath: /tmp
       containers:
       - name: adguard-home
@@ -43,6 +43,6 @@ spec:
       - name: adguard-conf
         persistentVolumeClaim:
           claimName: adguard-conf-pvc
-      - name: adguard-conf-secret
-        secret:
-          secretName: adguard-secret
+      - name: adguard-conf-map
+        configMap:
+          name: adguard-conf
