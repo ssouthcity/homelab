@@ -13,3 +13,5 @@ spec:
       version: 1.x
   values:
     groupName: acme.southcity.dev
+    certManager:
+      serviceAccountName: cert-manager-release
