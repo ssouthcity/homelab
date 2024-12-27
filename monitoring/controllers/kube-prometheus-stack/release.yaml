@@ -48,3 +48,5 @@ spec:
         - secretName: monitor-cert
           hosts:
           - monitor.home.southcity.dev
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
