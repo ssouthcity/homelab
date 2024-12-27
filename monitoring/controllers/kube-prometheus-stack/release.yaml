@@ -40,3 +40,9 @@ spec:
     grafana:
       defaultDashboardsEnabled: false
       adminPassword: flux
+    ingress:
+      enabled: true
+      hosts:
+      - monitoring.home.southcity.dev
+      paths:
+      - /
