@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: home-assistant
-        image: homeassistant/home-assistant
+        image: ghcr.io/home-assistant/home-assistant
         ports:
         - name: web
           containerPort: 8123
