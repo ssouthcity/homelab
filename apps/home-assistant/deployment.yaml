@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: home-assistant
+        image: homeassistant/home-assistant
+        ports:
+        - name: web
+          containerPort: 8123
+          protocol: TCP
+        volumeMounts:
+        - name: home-assistant-config
+          mountPath: /config
+      volumes:
+      - name: home-assistant-config
+        persistentVolumeClaim:
+          claimName: home-assistant-config
