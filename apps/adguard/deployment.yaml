@@ -4,13 +4,7 @@ metadata:
   name: adguard-deployment
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: adguard
   template:
-    metadata:
-      labels:
-        app: adguard
     spec:
       initContainers:
       - name: readonly-conf-workaround
