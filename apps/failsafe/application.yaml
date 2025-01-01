@@ -9,6 +9,7 @@ spec:
   path: ./k8s
   prune: true
   wait: true
+  interval: 10m0s
   decryption:
     provider: sops
     secretRef:
