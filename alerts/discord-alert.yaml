@@ -1,0 +1,14 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: discord
+spec:
+  summary: "Cluster addons impacted in us-east-2"
+  providerRef:
+    name: discord
+  eventSeverity: error
+  eventSources:
+  - kind: GitRepository
+    name: '*'
+  - kind: Kustomization
+    name: '*'
