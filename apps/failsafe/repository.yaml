@@ -5,3 +5,5 @@ metadata:
 spec:
   url: https://github.com/ssouthcity/failsafe
   interval: 10m0s
+  ref:
+    branch: main
