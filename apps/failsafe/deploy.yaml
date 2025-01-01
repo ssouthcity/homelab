@@ -9,6 +9,7 @@ spec:
       containers:
       - name: failsafe
         image: ssouthcity/failsafe-discord-bot:v0.1.7 # {"$imagepolicy": "failsafe:failsafe-discord-bot"}
+        imagePullPolicy: IfNotPresent
         envFrom:
         - secretRef:
             name: failsafe
