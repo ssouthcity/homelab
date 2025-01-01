@@ -1,0 +1,6 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: failsafe
+spec:
+  url: https://github.com/ssouthcity/failsafe
