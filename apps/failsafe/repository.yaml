@@ -4,3 +4,4 @@ metadata:
   name: failsafe
 spec:
   url: https://github.com/ssouthcity/failsafe
+  interval: 10m0s
