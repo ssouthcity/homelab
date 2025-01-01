@@ -3,10 +3,9 @@ kind: Alert
 metadata:
   name: discord
 spec:
-  summary: "Cluster addons impacted in us-east-2"
   providerRef:
     name: discord
-  eventSeverity: error
+  eventSeverity: info
   eventSources:
   - kind: GitRepository
     name: '*'
