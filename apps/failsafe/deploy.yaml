@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: failsafe
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: failsafe
+        image: ssouthcity/failsafe-discord-bot # {"$imagepolicy": "failsafe:failsafe-discord-bot"}
+        envFrom:
+        - secretRef:
+            name: failsafe
+      restartPolicy: Always
