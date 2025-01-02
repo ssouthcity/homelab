@@ -17,7 +17,8 @@ spec:
           mountPath: /tmp
       containers:
       - name: adguard-home
-        image: adguard/adguardhome:latest
+        image: adguard/adguardhome # {"$imagepolicy": "adguard:adguardhome"}
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 53
           name: dns

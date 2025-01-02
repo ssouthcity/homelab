@@ -8,6 +8,9 @@ commonLabels:
 resources:
   - namespace.yaml
   - deployment.yaml
+  - image-policy.yaml
+  - image-repository.yaml
+  - image-update-automation.yaml
   - pvc.yaml
   - service.yaml
   - configmap.yaml
