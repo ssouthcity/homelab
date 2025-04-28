@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: adguard-deployment
+  name: adguard
 spec:
   replicas: 1
   template:
@@ -34,10 +34,10 @@ spec:
       volumes:
       - name: adguard-data
         persistentVolumeClaim:
-          claimName: adguard-data-pvc
+          claimName: adguard-data
       - name: adguard-conf
         persistentVolumeClaim:
-          claimName: adguard-conf-pvc
+          claimName: adguard-conf
       - name: adguard-conf-map
         configMap:
           name: adguard-conf

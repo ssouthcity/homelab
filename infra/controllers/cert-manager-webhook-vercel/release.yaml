@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: cert-manager-webhook-vercel-release
+  name: cert-manager-webhook-vercel
 spec:
   interval: 5m
   chart:
@@ -13,5 +13,3 @@ spec:
       version: 1.x
   values:
     groupName: acme.southcity.dev
-    certManager:
-      serviceAccountName: cert-manager-release
