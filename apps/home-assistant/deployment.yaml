@@ -9,6 +9,8 @@ spec:
       containers:
       - name: home-assistant
         image: ghcr.io/home-assistant/home-assistant
+        securityContext:
+          privileged: true
         ports:
         - name: web
           containerPort: 8123
