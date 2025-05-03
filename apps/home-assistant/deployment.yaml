@@ -16,9 +16,9 @@ spec:
           containerPort: 8123
           protocol: TCP
         volumeMounts:
-        - name: home-assistant-config
+        - name: config
           mountPath: /config
       volumes:
-      - name: home-assistant-config
-        persistentVolumeClaim:
-          claimName: home-assistant-config
+      - name: config
+        configMap:
+          name: home-manager
