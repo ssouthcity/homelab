@@ -6,8 +6,8 @@ commonLabels:
   app.kubernetes.io/part-of: smart-home-system
   app.kubernetes.io/component: hub
 resources:
-- namespace.yaml
+- config.yaml
 - deployment.yaml
-- service.yaml
 - ingress.yaml
-- pvc.yaml
+- namespace.yaml
+- service.yaml
