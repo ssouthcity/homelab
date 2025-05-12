@@ -18,8 +18,16 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
-          readOnly: false
+        - name: config-configmap 
+          mountPath: /config/configuration.yaml
+          subPath: configuration.yaml
+        - name: config-configmap 
+          mountPath: /config/automations.yaml
+          subPath: automations.yaml
       volumes:
-      - name: config
+      - name: config-pvc
+        persistentVolumeClaim:
+          claimName: home-manager-config
+      - name: config-configmap
         configMap:
           name: home-manager
