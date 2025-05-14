@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: home-assistant
-        image: ghcr.io/home-assistant/home-assistant:stable
+        image: lscr.io/linuxserver/homeassistant
         securityContext:
           privileged: true
         ports:
