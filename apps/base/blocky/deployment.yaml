@@ -35,7 +35,9 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: blocky-config
-              mountPath: /app
+              mountPath: /app/config.yml
+              subPath: config.yml
+              readOnly: true
       volumes:
         - name: blocky-config
           configMap:
