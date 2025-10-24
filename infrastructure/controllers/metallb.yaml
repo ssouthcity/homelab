@@ -1,0 +1,34 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/warn: privileged
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: metallb
+  namespace: metallb
+spec:
+  interval: 5m
+  url: https://metallb.github.io/metallb
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: metallb
+  namespace: metallb
+spec:
+  releaseName: metallb
+  interval: 30m
+  chart:
+    spec:
+      chart: metallb
+      sourceRef:
+        kind: HelmRepository
+        name: metallb
+  values: {}
