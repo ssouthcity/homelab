@@ -18,6 +18,11 @@ spec:
       containers:
         - name: blocky
           image: spx01/blocky:v0.27.0
+          securityContext:
+            capabilities:
+              drop: ["ALL"]
+              add: ["NET_BIND_SERVICE"]
+            runAsNonRoot: true
           ports:
             - name: dns-tcp
               containerPort: 53
