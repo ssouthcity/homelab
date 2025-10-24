@@ -1,8 +1,0 @@
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-kind: ImageRepository
-metadata:
-  name: failsafe-discord-bot
-spec:
-  image: ssouthcity/failsafe-discord-bot
-  interval: 5m0s
-  provider: generic
