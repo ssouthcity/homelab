@@ -11,6 +11,7 @@ spec:
   selector:
     app.kubernetes.io/name: blocky
   type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
   - name: dns-udp
     port: 53
@@ -18,8 +19,8 @@ spec:
     protocol: UDP
   - name: dns-tcp
     port: 53
-    protocol: TCP
     targetPort: dns-tcp
+    protocol: TCP
   - name: prometheus
     port: 4000
     targetPort: prometheus
