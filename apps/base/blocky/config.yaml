@@ -14,9 +14,11 @@ data:
           - 1.0.0.1
           - 2606:4700:4700::1111
           - 2606:4700:4700::1001
+
     blocking:
       denylists:
         ads:
+          - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.txt
           - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
       clientGroupsBlock:
         default:
@@ -24,3 +26,6 @@ data:
     ports:
       dns: 53
       http: 4000
+
+    log:
+      level: trace
