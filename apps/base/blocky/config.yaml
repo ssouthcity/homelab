@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blocky
+  namespace: blocky
+  labels:
+    app.kubernetes.io/name: blocky
+data:
+  config.yml: |
+    upstreams:
+      groups:
+        default:
+          - 1.1.1.1
+          - 1.0.0.1
+          - 2606:4700:4700::1111
+          - 2606:4700:4700::1001
+    blocking:
+      denylists:
+        ads:
+          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      clientGroupsBlock:
+        default:
+          - ads
+    ports:
+      dns: 53
+      http: 4000
