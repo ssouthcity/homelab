@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blocky
+  namespace: blocky
+  labels:
+    app.kubernetes.io/name: blocky
+    app.kubernetes.io/instance: blocky
+    app.kubernetes.io/version: v0.27.0
+    app.kubernetes.io/component: dns
+    app.kubernetes.io/part-of: blocky
+    app.kubernetes.io/managed-by: flux
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: blocky
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: blocky
+        app.kubernetes.io/instance: blocky
+        app.kubernetes.io/version: v0.27.0
+        app.kubernetes.io/component: dns
+        app.kubernetes.io/part-of: blocky
+        app.kubernetes.io/managed-by: flux
+    spec:
+      containers:
+        - name: blocky
+          image: spx01/blocky:v0.27.0
+          ports:
+            - name: dns-tcp
+              containerPort: 53
+              protocol: TCP
+            - name: dns-udp
+              containerPort: 53
+              protocol: UDP
+            - name: prometheus
+              containerPort: 4000
+              protocol: TCP
