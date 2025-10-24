@@ -3,28 +3,30 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      in 
-      {
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [ 
-            age
-            ansible
-            fluxcd
-            k9s
-            kubectl
-            rpi-imager
-            sops
-          ];
-        };
-      });
+  outputs = { nixpkgs, ... }:
+    let 
+      eachSystem = nixpkgs.lib.genAttrs ["x86_64-linux"];
+    in 
+    {
+      devShell = eachSystem (system:
+          let 
+            pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          in 
+          pkgs.mkShell {
+            packages = [ 
+              pkgs.age
+              pkgs.fluxcd
+              pkgs.k9s
+              pkgs.kubectl
+              pkgs.sops
+              pkgs.talosctl
+            ];
+          }
+      );
+    };
 }
