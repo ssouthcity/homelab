@@ -36,7 +36,6 @@ spec:
           volumeMounts:
             - name: blocky-config
               mountPath: /app
-              readOnly: true
       volumes:
         - name: blocky-config
           configMap:
