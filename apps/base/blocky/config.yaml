@@ -18,7 +18,7 @@ data:
     blocking:
       denylists:
         ads:
-          - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.txt
+          - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt
           - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
       clientGroupsBlock:
         default:
@@ -28,4 +28,4 @@ data:
       http: 4000
 
     log:
-      level: trace
+      level: error
