@@ -4,4 +4,4 @@ stores:
 
 creation_rules:
 - encrypted_regex: '^(data|stringData)$'
-  age: age17dhlnu9e4p3lmuacnaecg0vsrtj35ant2qvzwv97vy7sq0yhcq8szcttv6
+  age: age1th32fhtm6wlmy824uwpsykwhe08ycj6nj5m8lvedfq5nwnz095ts93uzsm
