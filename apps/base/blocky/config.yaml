@@ -33,3 +33,6 @@ data:
     prometheus:
       enable: true
       path: /metrics
+
+    caching:
+      prefetching: true

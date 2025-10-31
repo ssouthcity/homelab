@@ -5,6 +5,18 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - monitoring.yaml
-  - dashboards.yaml
   - config.yaml
   - service.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: dashboards
+    namespace: blocky
+    options:
+      labels:
+        app.kubernetes.io/name: blocky
+        grafana_dashboard: "1"
+    files:
+      - ./dashboards/blocky.json
