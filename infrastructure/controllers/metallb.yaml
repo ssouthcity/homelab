@@ -31,4 +31,15 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: metallb
-  values: {}
+  values:
+    prometheus:
+      namespace: monitoring
+      serviceAccount: kube-prometheus-stack-metallb
+      serviceMonitor:
+        enabled: true
+        speaker:
+          additionalLabels:
+            release: kube-prometheus-stack
+        controller:
+          additionalLabels:
+            release: kube-prometheus-stack

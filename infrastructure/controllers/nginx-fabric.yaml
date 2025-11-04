@@ -32,3 +32,17 @@ spec:
     nginx:
       service:
         loadBalancerIP: 10.0.30.192
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: nginx-fabric
+  namespace: nginx-fabric
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nginx-gateway-fabric
+  podMetricsEndpoints:
+    - targetPort: 9113
