@@ -5,3 +5,22 @@ resources:
   - metallb.yaml
   - monitoring.yaml
   - nginx-fabric.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: dashboards
+    namespace: cert-manager
+    options:
+      labels:
+        grafana_dashboard: "1"
+    files:
+      - ./dashboards/cert-manager.json
+  - name: dashboards
+    namespace: metallb
+    options:
+      labels:
+        grafana_dashboard: "1"
+    files:
+      - ./dashboards/metallb.json
