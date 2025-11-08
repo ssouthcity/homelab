@@ -1,0 +1,155 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pocket-id
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pocket-id
+  namespace: pocket-id
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pocket-id
+  namespace: pocket-id
+  labels:
+    app: pocket-id
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pocket-id
+  template:
+    metadata:
+      labels:
+        app: pocket-id
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: pocket-id
+          image: ghcr.io/pocket-id/pocket-id:v1.15.0
+          ports:
+            - name: http
+              containerPort: 1411
+              protocol: TCP
+            - name: http-metrics
+              containerPort: 9464
+              protocol: TCP
+          env:
+            - name: APP_URL
+              value: "https://pocket-id.home.southcity.dev"
+            - name: TRUST_PROXY
+              value: "true"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            # prometheus
+            - name: METRICS_ENABLED
+              value: "true"
+            - name: TRACING_ENABLED
+              value: "true"
+            - name: OTEL_METRICS_EXPORTER
+              value: "prometheus"
+            - name: OTEL_EXPORTER_PROMETHEUS_HOST
+              value: "localhost"
+            - name: OTEL_EXPORTER_PROMETHEUS_PORT
+              value: "9464"
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            capabilities:
+              drop:
+                - ALL
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          livenessProbe:
+            initialDelaySeconds: 60
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            initialDelaySeconds: 60
+            httpGet:
+              path: /healthz
+              port: http
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pocket-id
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pocket-id
+  namespace: pocket-id
+  labels:
+    app: pocket-id
+spec:
+  type: ClusterIP
+  selector:
+    app: pocket-id
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
+    - name: http-metrics
+      port: 9464
+      targetPort: http-metrics
+      protocol: TCP
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: pocket-id
+  namespace: pocket-id
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: default
+  hostnames:
+    - "pocket-id.home.southcity.dev"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: pocket-id
+          port: 80
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: pocket-id
+  namespace: pocket-id
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: pocket-id
+  endpoints:
+    - port: http-metrics

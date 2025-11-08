@@ -6,6 +6,7 @@ resources:
   - metallb.yaml
   - monitoring.yaml
   - nginx-fabric.yaml
+  - pocket-id.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
