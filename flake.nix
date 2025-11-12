@@ -23,6 +23,7 @@
               pkgs.fluxcd
               pkgs.k9s
               pkgs.kubectl
+              pkgs.kubernetes-helm
               pkgs.sops
               pkgs.talosctl
             ];

@@ -48,7 +48,7 @@ spec:
               protocol: TCP
           env:
             - name: APP_URL
-              value: "https://pocket-id.home.southcity.dev"
+              value: "https://pocket-id.southcity.dev"
             - name: TRUST_PROXY
               value: "true"
             - name: PUID
@@ -127,16 +127,12 @@ metadata:
   namespace: pocket-id
 spec:
   parentRefs:
-    - name: gateway
-      namespace: default
+    - name: http
+      namespace: kgateway-system
   hostnames:
-    - "pocket-id.home.southcity.dev"
+    - "pocket-id.southcity.dev"
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
+    - backendRefs:
         - name: pocket-id
           port: 80
 ---

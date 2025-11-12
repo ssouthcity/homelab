@@ -33,7 +33,7 @@ spec:
     grafana:
       grafana.ini:
         server:
-          root_url: https://grafana.home.southcity.dev
+          root_url: https://grafana.southcity.dev
         auth:
           disable_login_form: true
           oauth_auto_login: true
@@ -41,9 +41,9 @@ spec:
           enabled: true
           name: Pocket ID
           scopes: openid profile email groups
-          auth_url: https://pocket-id.home.southcity.dev/authorize
-          token_url: https://pocket-id.home.southcity.dev/api/oidc/token
-          api_url: https://pocket-id.home.southcity.dev/api/oidc/userinfo
+          auth_url: https://pocket-id.southcity.dev/authorize
+          token_url: https://pocket-id.southcity.dev/api/oidc/token
+          api_url: https://pocket-id.southcity.dev/api/oidc/userinfo
           use_pkce: true
           allow_sign_up: true
           role_attribute_path: contains(groups[*], 'admins') && 'Admin' || contains(groups[*], 'users') && 'Editor' || 'Viewer'
@@ -58,3 +58,19 @@ spec:
           secretKeyRef:
             name: grafana-oidc
             key: client_secret
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: http
+      namespace: kgateway-system
+  hostnames:
+    - "grafana.southcity.dev"
+  rules:
+    - backendRefs:
+        - name: kube-prometheus-stack-grafana
+          port: 80
