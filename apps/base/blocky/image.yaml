@@ -19,3 +19,26 @@ spec:
   policy:
     semver:
       range: v0.x.x
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: default
+  namespace: blocky
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: |
+        chore(blocky): update image versions to {{ join ", " (pluck "NewValue" .Changed.Changes) }}
+    push:
+      branch: main
