@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: blocky
-          image: spx01/blocky:v0.28.0 # {"$imagepolicy": "blocky:blocky"}
+          image: spx01/blocky:v0.28.1 # {"$imagepolicy": "blocky:blocky"}
           securityContext:
             capabilities:
               drop: ["ALL"]
