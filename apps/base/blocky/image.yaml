@@ -40,6 +40,6 @@ spec:
         name: fluxcdbot
         email: fluxcdbot@users.noreply.github.com
       messageTemplate: |
-        chore(blocky): update image versions to {{ join ", " (pluck "NewValue" .Changed.Changes) }}
+        chore(blocky): update image versions to {{- range .Changed.Changes }}{{ .NewValue }}{{- end }}
     push:
       branch: main
