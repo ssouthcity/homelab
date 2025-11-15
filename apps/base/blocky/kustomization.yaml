@@ -2,10 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: blocky
 resources:
-  - namespace.yaml
-  - deployment.yaml
-  - monitoring.yaml
   - config.yaml
+  - deployment.yaml
+  - image.yaml
+  - monitoring.yaml
+  - namespace.yaml
   - service.yaml
 
 generatorOptions:

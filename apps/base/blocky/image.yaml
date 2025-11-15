@@ -1,0 +1,21 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: blocky
+  namespace: blocky
+spec:
+  image: spx01/blocky
+  interval: 5h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: blocky
+  namespace: blocky
+spec:
+  imageRepositoryRef:
+    name: blocky
+  policy:
+    semver:
+      range: v0.x.x

@@ -1,0 +1,35 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: default
+  namespace: flux-system
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: |
+        chore(image-update): automated image update by Flux
+
+        automation: {{ .AutomationObject.Namespace }}/{{ .AutomationObject.Name }}
+
+        changes:
+        {{- range .Changed.Changes }}
+        - {{ .OldValue }} -> {{ .NewValue }}
+        {{- end }}
+
+        files:
+        {{- range $filename, $_ := .Changed.FileChanges }}
+        - {{ $filename }}
+        {{- end }}
+    push:
+      branch: main
