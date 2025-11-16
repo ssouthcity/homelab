@@ -8,10 +8,8 @@ resources:
   - monitoring.yaml
   - namespace.yaml
   - service.yaml
-
 generatorOptions:
   disableNameSuffixHash: true
-
 configMapGenerator:
   - name: dashboards
     namespace: blocky

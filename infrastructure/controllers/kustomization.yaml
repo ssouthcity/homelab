@@ -8,10 +8,8 @@ resources:
   - metallb.yaml
   - monitoring.yaml
   - pocket-id.yaml
-
 generatorOptions:
   disableNameSuffixHash: true
-
 configMapGenerator:
   - name: dashboards
     namespace: cert-manager

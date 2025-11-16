@@ -1,7 +1,7 @@
 stores:
   yaml:
     indent: 2
-
 creation_rules:
-- encrypted_regex: '^(data|stringData)$'
-  age: age1th32fhtm6wlmy824uwpsykwhe08ycj6nj5m8lvedfq5nwnz095ts93uzsm
+  - path_regex: '.*\.enc\.yaml$'
+    encrypted_regex: '^(data|stringData)$'
+    age: age1th32fhtm6wlmy824uwpsykwhe08ycj6nj5m8lvedfq5nwnz095ts93uzsm
