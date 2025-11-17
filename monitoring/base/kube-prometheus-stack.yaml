@@ -22,6 +22,7 @@ spec:
   values:
     grafana:
       route:
+        enabled: true
         parentRefs:
           - name: http
             namespace: kgateway-system
