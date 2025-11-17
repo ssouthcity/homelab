@@ -22,12 +22,13 @@ spec:
   values:
     grafana:
       route:
-        enabled: true
-        parentRefs:
-          - name: http
-            namespace: kgateway-system
-        hostnames:
-          - "grafana.southcity.dev"
+        main:
+          enabled: true
+          parentRefs:
+            - name: http
+              namespace: kgateway-system
+          hostnames:
+            - "grafana.southcity.dev"
       grafana.ini:
         server:
           root_url: https://grafana.southcity.dev
