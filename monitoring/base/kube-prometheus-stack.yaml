@@ -1,15 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: monitoring
-  labels:
-    pod-security.kubernetes.io/enforce: privileged
----
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: prometheus-community
-  namespace: monitoring
 spec:
   interval: 5m
   url: https://prometheus-community.github.io/helm-charts
@@ -18,7 +10,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
-  namespace: monitoring
 spec:
   releaseName: kube-prometheus-stack
   interval: 30m
@@ -30,6 +21,12 @@ spec:
         name: prometheus-community
   values:
     grafana:
+      route:
+        parentRefs:
+          - name: http
+            namespace: kgateway-system
+        hostnames:
+          - "grafana.southcity.dev"
       grafana.ini:
         server:
           root_url: https://grafana.southcity.dev
@@ -57,19 +54,3 @@ spec:
           secretKeyRef:
             name: grafana-oidc
             key: client_secret
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: grafana
-  namespace: monitoring
-spec:
-  parentRefs:
-    - name: http
-      namespace: kgateway-system
-  hostnames:
-    - "grafana.southcity.dev"
-  rules:
-    - backendRefs:
-        - name: kube-prometheus-stack-grafana
-          port: 80

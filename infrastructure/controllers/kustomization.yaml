@@ -6,7 +6,6 @@ resources:
   - kgateway.yaml
   - longhorn.yaml
   - metallb.yaml
-  - monitoring.yaml
   - pocket-id.yaml
 generatorOptions:
   disableNameSuffixHash: true
