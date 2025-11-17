@@ -4,4 +4,5 @@ namespace: monitoring
 resources:
   - grafana-oidc.enc.yaml
   - kube-prometheus-stack.yaml
+  - loki.yaml
   - namespace.yaml
