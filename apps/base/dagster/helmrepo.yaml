@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: dagster-cloud
+spec:
+  interval: 5m
+  url: https://dagster-io.github.io/helm-user-cloud

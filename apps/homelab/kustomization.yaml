@@ -3,3 +3,8 @@ kind: Kustomization
 resources:
   - ../base/blocky
   - ../base/komga
+  - ../base/dagster
+patches:
+  - path: dagster-values.yaml
+    target:
+      kind: HelmRelease

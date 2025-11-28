@@ -1,0 +1,13 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dagster-cloud
+spec:
+  releaseName: dagster-cloud
+  interval: 30m
+  chart:
+    spec:
+      chart: dagster-cloud-agent
+      sourceRef:
+        kind: HelmRepository
+        name: dagster-cloud
