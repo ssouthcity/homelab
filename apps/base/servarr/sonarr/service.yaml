@@ -11,3 +11,4 @@ spec:
       protocol: TCP
       port: 8989
       targetPort: http
+      appProtocol: kubernetes.io/ws
