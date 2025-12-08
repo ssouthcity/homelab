@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: servarr
 resources:
   - deployment.yaml
+  - gluetun.secret.enc.yaml
   - pvc.yaml
   - route.yaml
   - service.yaml

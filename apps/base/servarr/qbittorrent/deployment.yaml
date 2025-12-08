@@ -42,6 +42,24 @@ spec:
               mountPath: /config
             - name: downloads
               mountPath: /downloads
+        - name: gluetun
+          image: qmcgaw/gluetun:latest
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN"]
+          envFrom:
+            - secretRef:
+                name: gluetun-environment
+          ports:
+            - name: http-proxy
+              containerPort: 8888
+              protocol: TCP
+            - name: shadowsocks-tcp
+              containerPort: 8388
+              protocol: TCP
+            - name: shadowsocks-udp
+              containerPort: 8388
+              protocol: UDP
       volumes:
         - name: qbittorrent
           persistentVolumeClaim:
