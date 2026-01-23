@@ -2,6 +2,12 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: qbittorrent
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: qBittorrent
+    gethomepage.dev/group: Media Server
+    gethomepage.dev/description: Torrenting Client
+    gethomepage.dev/icon: qbittorrent.png
 spec:
   parentRefs:
     - name: http

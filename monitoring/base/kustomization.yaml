@@ -5,4 +5,5 @@ resources:
   - grafana-oidc.enc.yaml
   - kube-prometheus-stack.yaml
   - loki.yaml
+  - metrics-server.yaml
   - namespace.yaml
