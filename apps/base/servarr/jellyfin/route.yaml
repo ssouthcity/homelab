@@ -8,6 +8,7 @@ metadata:
     gethomepage.dev/description: Media Server
     gethomepage.dev/group: Software Media System Server
     gethomepage.dev/icon: jellyfin.png
+    gethomepage.dev/pod-selector: ""
 spec:
   parentRefs:
     - name: http

@@ -24,6 +24,13 @@ spec:
       route:
         main:
           enabled: true
+          annotations:
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: Grafana
+            gethomepage.dev/group: Cluster Management
+            gethomepage.dev/description: Monitoring and Visualizations
+            gethomepage.dev/icon: grafana.png
+            gethomepage.dev/pod-selector: ""
           parentRefs:
             - name: http
               namespace: kgateway-system

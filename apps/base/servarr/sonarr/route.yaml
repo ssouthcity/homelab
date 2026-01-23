@@ -8,6 +8,7 @@ metadata:
     gethomepage.dev/group: Media Server
     gethomepage.dev/description: Media Management
     gethomepage.dev/icon: sonarr.png
+    gethomepage.dev/pod-selector: ""
 spec:
   parentRefs:
     - name: http
