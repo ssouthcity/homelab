@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: home-assistant
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Home Assistant
+    gethomepage.dev/description: Internet of Things Automation Manager
+    gethomepage.dev/group: IoT
+    gethomepage.dev/icon: home-assistant.png
+    gethomepage.dev/pod-selector: ""
+spec:
+  parentRefs:
+    - name: http
+      namespace: kgateway-system
+  hostnames:
+    - "home-assistant.southcity.dev"
+  rules:
+    - backendRefs:
+        - name: home-assistant
+          port: 8123

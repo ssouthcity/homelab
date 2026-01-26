@@ -4,6 +4,8 @@ resources:
   - ../base/blocky
   - ../base/komga
   - ../base/dagster
+  - ../base/home-assistant
+  - ../base/homepage
   - ../base/servarr
 patches:
   - path: dagster-values.yaml
