@@ -4,6 +4,7 @@ namespace: servarr
 resources:
   - namespace.yaml
   - pvc.yaml
+  - jellyfin
   - prowlarr
   - sonarr
   - qbittorrent

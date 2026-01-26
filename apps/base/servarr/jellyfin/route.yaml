@@ -5,8 +5,8 @@ metadata:
   annotations:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Jellyfin
-    gethomepage.dev/description: Media Server
-    gethomepage.dev/group: Software Media System Server
+    gethomepage.dev/description: Software Media System Server
+    gethomepage.dev/group: Media Server
     gethomepage.dev/icon: jellyfin.png
     gethomepage.dev/pod-selector: ""
 spec:

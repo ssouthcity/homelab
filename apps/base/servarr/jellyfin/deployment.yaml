@@ -45,3 +45,4 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
+            readOnly: true
