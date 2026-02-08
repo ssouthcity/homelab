@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: jellyfin
-          image: lscr.io/linuxserver/jellyfin:10.10.6 # {"$imagepolicy": "servarr:jellyfin"}
+          image: lscr.io/linuxserver/jellyfin:10.11.6 # {"$imagepolicy": "servarr:jellyfin"}
           env:
             - name: PUID
               value: "1000"
