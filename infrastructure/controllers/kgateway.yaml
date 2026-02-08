@@ -3,6 +3,16 @@ kind: Namespace
 metadata:
   name: kgateway-system
 ---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: kgateway
+  namespace: kgateway-system
+spec:
+  type: oci
+  interval: 5m
+  url: oci://cr.kgateway.dev/kgateway-dev/charts
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -13,9 +23,10 @@ spec:
   chart:
     spec:
       chart: kgateway-crds
+      version: ~2
       sourceRef:
-        kind: OCIRepository
-        name: kgateway-crds
+        kind: HelmRepository
+        name: kgateway
   values: {}
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
@@ -28,8 +39,9 @@ spec:
   chart:
     spec:
       chart: kgateway
+      version: ~2
       sourceRef:
-        kind: OCIRepository
+        kind: HelmRepository
         name: kgateway
   values:
     agentgateway:

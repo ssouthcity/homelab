@@ -3,6 +3,16 @@ kind: Namespace
 metadata:
   name: cert-manager
 ---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  type: oci
+  interval: 5m
+  url: oci://quay.io/jetstack/charts
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -14,8 +24,9 @@ spec:
   chart:
     spec:
       chart: cert-manager
+      version: ~1
       sourceRef:
-        kind: OCIRepository
+        kind: HelmRepository
         name: cert-manager
   values:
     crds:
