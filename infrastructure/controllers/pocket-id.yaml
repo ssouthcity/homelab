@@ -54,6 +54,11 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pocket-id-encryption
+                  key: encryption-key
             # prometheus
             - name: METRICS_ENABLED
               value: "true"
