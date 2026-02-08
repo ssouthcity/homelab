@@ -2,12 +2,16 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - cert-manager.yaml
+  - cert-manager-oci.yaml
   - csi-s3.yaml
   - external-dns.yaml
+  - external-dns-image.yaml
   - kgateway.yaml
+  - kgateway-oci.yaml
   - longhorn.yaml
   - metallb.yaml
   - pocket-id.yaml
+  - pocket-id-image.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:

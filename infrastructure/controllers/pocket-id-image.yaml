@@ -1,29 +1,29 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: blocky
-  namespace: blocky
+  name: pocket-id
+  namespace: pocket-id
 spec:
-  image: spx01/blocky
+  image: ghcr.io/pocket-id/pocket-id
   interval: 5h
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: blocky
-  namespace: blocky
+  name: pocket-id
+  namespace: pocket-id
 spec:
   imageRepositoryRef:
-    name: blocky
+    name: pocket-id
   policy:
     semver:
-      range: ~0
+      range: ~2
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageUpdateAutomation
 metadata:
   name: default
-  namespace: blocky
+  namespace: pocket-id
 spec:
   interval: 30m
   sourceRef:
@@ -39,6 +39,6 @@ spec:
         name: fluxcdbot
         email: fluxcdbot@users.noreply.github.com
       messageTemplate: |
-        chore(blocky): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
+        chore(pocket-id): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
     push:
       branch: main

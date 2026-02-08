@@ -1,29 +1,29 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: blocky
-  namespace: blocky
+  name: home-assistant
+  namespace: home-assistant
 spec:
-  image: spx01/blocky
+  image: ghcr.io/home-assistant/home-assistant
   interval: 5h
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: blocky
-  namespace: blocky
+  name: home-assistant
+  namespace: home-assistant
 spec:
   imageRepositoryRef:
-    name: blocky
+    name: home-assistant
   policy:
     semver:
-      range: ~0
+      range: "*"
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageUpdateAutomation
 metadata:
   name: default
-  namespace: blocky
+  namespace: home-assistant
 spec:
   interval: 30m
   sourceRef:
@@ -39,6 +39,6 @@ spec:
         name: fluxcdbot
         email: fluxcdbot@users.noreply.github.com
       messageTemplate: |
-        chore(blocky): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
+        chore(home-assistant): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
     push:
       branch: main

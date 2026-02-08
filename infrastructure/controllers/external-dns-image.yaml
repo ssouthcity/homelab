@@ -1,20 +1,20 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: blocky
-  namespace: blocky
+  name: external-dns
+  namespace: external-dns
 spec:
-  image: spx01/blocky
+  image: registry.k8s.io/external-dns/external-dns
   interval: 5h
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: blocky
-  namespace: blocky
+  name: external-dns
+  namespace: external-dns
 spec:
   imageRepositoryRef:
-    name: blocky
+    name: external-dns
   policy:
     semver:
       range: ~0
@@ -23,7 +23,7 @@ apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageUpdateAutomation
 metadata:
   name: default
-  namespace: blocky
+  namespace: external-dns
 spec:
   interval: 30m
   sourceRef:
@@ -39,6 +39,6 @@ spec:
         name: fluxcdbot
         email: fluxcdbot@users.noreply.github.com
       messageTemplate: |
-        chore(blocky): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
+        chore(external-dns): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
     push:
       branch: main

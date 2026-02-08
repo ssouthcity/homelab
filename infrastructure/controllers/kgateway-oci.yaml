@@ -1,0 +1,21 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: kgateway-crds
+  namespace: kgateway-system
+spec:
+  interval: 5m
+  url: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway-crds
+  ref:
+    semver: ~2
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: kgateway
+  namespace: kgateway-system
+spec:
+  interval: 5m
+  url: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway
+  ref:
+    semver: ~2

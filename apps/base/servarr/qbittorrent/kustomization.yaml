@@ -4,6 +4,7 @@ namespace: servarr
 resources:
   - deployment.yaml
   - gluetun.secret.enc.yaml
+  - image.yaml
   - pvc.yaml
   - route.yaml
   - service.yaml

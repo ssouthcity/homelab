@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       chart: dagster-cloud-agent
+      version: ~1
       sourceRef:
         kind: HelmRepository
         name: dagster-cloud

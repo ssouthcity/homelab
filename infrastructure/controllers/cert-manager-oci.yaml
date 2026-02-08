@@ -1,0 +1,49 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  interval: 5m
+  url: oci://quay.io/jetstack/charts/cert-manager
+  ref:
+    semver: ~1
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  imageRepositoryRef:
+    name: cert-manager
+  policy:
+    semver:
+      range: ~1
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: |
+        chore(cert-manager): update helm chart to {{ .Updated.ImagePolicy.LatestVersion }}
+    push:
+      branch: main
+  policy:
+    semver:
+      range: ~1

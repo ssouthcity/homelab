@@ -16,6 +16,7 @@ spec:
   chart:
     spec:
       chart: loki
+      version: ~6
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -80,6 +81,7 @@ spec:
   chart:
     spec:
       chart: alloy
+      version: ~1
       sourceRef:
         kind: HelmRepository
         name: grafana
