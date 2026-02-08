@@ -4,14 +4,26 @@ metadata:
   name: kgateway-system
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: kgateway
   namespace: kgateway-system
 spec:
-  type: oci
   interval: 5m
-  url: oci://cr.kgateway.dev/kgateway-dev/charts
+  url: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway
+  ref:
+    semver: ~2
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: kgateway-crds
+  namespace: kgateway-system
+spec:
+  interval: 5m
+  url: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway-crds
+  ref:
+    semver: ~2
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -20,13 +32,10 @@ metadata:
   namespace: kgateway-system
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: kgateway-crds
-      version: ~2
-      sourceRef:
-        kind: HelmRepository
-        name: kgateway
+  releaseName: kgateway-crds
+  chartRef:
+    kind: OCIRepository
+    name: kgateway-crds
   values: {}
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
@@ -36,13 +45,10 @@ metadata:
   namespace: kgateway-system
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: kgateway
-      version: ~2
-      sourceRef:
-        kind: HelmRepository
-        name: kgateway
+  releaseName: kgateway
+  chartRef:
+    kind: OCIRepository
+    name: kgateway
   values:
     agentgateway:
       enabled: true
