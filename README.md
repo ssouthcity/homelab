@@ -45,6 +45,22 @@ nix develop
 nix fmt
 ```
 
+## Image Updates
+
+This repository uses **FluxCD Image Update Automation** to automatically keep container images up-to-date:
+
+1. **Detection**: Flux scans container registries every 5 hours for new image versions
+2. **Branch Creation**: When updates are found, Flux creates feature branches with pattern `image-update-<app-name>`
+3. **Automatic PRs**: GitHub Actions automatically creates pull requests from these branches
+4. **Review**: PRs can be reviewed and merged to apply updates
+
+### Workflow Features
+
+- **Semantic Branch Naming**: Uses `image-update-*` pattern to filter automation branches
+- **PR Deduplication**: Prevents duplicate PRs for the same update
+- **Automatic Labeling**: PRs are labeled with `image-update` and `automated`
+- **Rich Descriptions**: Includes commit details and verification information
+
 ---
 
 *Built with care for learning, experimentation, and reliable self-hosting.*
