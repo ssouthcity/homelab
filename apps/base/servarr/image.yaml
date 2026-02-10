@@ -20,4 +20,4 @@ spec:
       messageTemplate: |
         chore(servarr): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
     push:
-      branch: image-update-servarr
+      branch: chore/image-update-automation-servarr

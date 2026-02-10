@@ -41,4 +41,4 @@ spec:
       messageTemplate: |
         chore(pocket-id): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
     push:
-      branch: image-update-pocket-id
+      branch: chore/image-update-automation-pocket-id

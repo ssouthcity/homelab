@@ -3,7 +3,7 @@ name: Auto PR for Flux Image Updates
 on:
   push:
     branches:
-      - 'image-update-*'
+      - 'chore/image-update-automation-*'
 
 jobs:
   auto-pr:
@@ -19,18 +19,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Extract image name from branch
-        id: extract-image
+      - name: Extract image name and version from branch
+        id: extract-info
         run: |
           BRANCH_NAME="${{ github.ref_name }}"
-          IMAGE_NAME=$(echo "$BRANCH_NAME" | sed 's/image-update-//')
+          IMAGE_NAME=$(echo "$BRANCH_NAME" | sed 's/chore\/image-update-automation-//')
           echo "image-name=$IMAGE_NAME" >> $GITHUB_OUTPUT
 
       - name: Check if PR already exists
         id: check-pr
         run: |
-          IMAGE_NAME="${{ steps.extract-image.outputs.image-name }}"
-          PR_COUNT=$(gh pr list --head "image-update-$IMAGE_NAME" --state open --json number --jq 'length')
+          IMAGE_NAME="${{ steps.extract-info.outputs.image-name }}"
+          PR_COUNT=$(gh pr list --head "chore/image-update-automation-$IMAGE_NAME" --state open --json number --jq 'length')
           echo "pr-count=$PR_COUNT" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,20 +38,23 @@ jobs:
       - name: Create Pull Request
         if: steps.check-pr.outputs.pr-count == '0'
         run: |
-          IMAGE_NAME="${{ steps.extract-image.outputs.image-name }}"
-          BRANCH_NAME="image-update-$IMAGE_NAME"
+          IMAGE_NAME="${{ steps.extract-info.outputs.image-name }}"
+          BRANCH_NAME="chore/image-update-automation-$IMAGE_NAME"
           
           # Get the commit details
           COMMIT_HASH=$(git rev-parse HEAD)
           COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
           
+          # Extract version from commit message or use commit hash
+          VERSION=$(echo "$COMMIT_MESSAGE" | grep -oE 'v?[0-9]+\.[0-9]+\.[0-9]+' | head -1 || echo "$COMMIT_HASH")
+          
           # Create PR with descriptive title and body
           gh pr create \
-            --title "feat: Update $IMAGE_NAME image" \
+            --title "chore(image-update-automation): update $IMAGE_NAME to $VERSION" \
             --body "$(cat <<EOF
-          ## Image Update
+          ## Image Update Automation
           
-          This PR updates the \`$IMAGE_NAME\` container image to a new version automatically detected by Flux.
+          This PR updates the \`$IMAGE_NAME\` container image to version \`$VERSION\` automatically detected by Flux.
           
           **Source Branch:** \`$BRANCH_NAME\`  
           **Commit:** $COMMIT_HASH  
@@ -77,5 +80,5 @@ jobs:
       - name: PR already exists
         if: steps.check-pr.outputs.pr-count != '0'
         run: |
-          IMAGE_NAME="${{ steps.extract-image.outputs.image-name }}"
-          echo "PR for image-update-$IMAGE_NAME already exists, skipping creation."
+          IMAGE_NAME="${{ steps.extract-info.outputs.image-name }}"
+          echo "PR for chore/image-update-automation-$IMAGE_NAME already exists, skipping creation."
