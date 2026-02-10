@@ -41,4 +41,4 @@ spec:
       messageTemplate: |
         chore(homepage): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
     push:
-      branch: main
+      branch: image-update-homepage

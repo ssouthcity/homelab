@@ -41,4 +41,4 @@ spec:
       messageTemplate: |
         chore(blocky): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
     push:
-      branch: main
+      branch: image-update-blocky
