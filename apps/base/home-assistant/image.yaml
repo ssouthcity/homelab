@@ -41,4 +41,4 @@ spec:
       messageTemplate: |
         chore(home-assistant): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
     push:
-      branch: main
+      branch: chore/image-update-automation-home-assistant
