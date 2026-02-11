@@ -16,7 +16,13 @@ jobs:
         uses: fluxcd/flux2/action@main
       - name: Check for updates
         id: update
-        run: "flux install \\\n  --export > ./clusters/homelab/flux-system/gotk-components.yaml\n\nVERSION=\"$(flux -v)\"\necho \"flux_version=$VERSION\" >> $GITHUB_OUTPUT          \n"
+        run: |
+          flux install \
+            --components-extra "image-reflector-controller,image-automation-controller" \
+            --export > ./clusters/homelab/flux-system/gotk-components.yaml
+
+          VERSION="$(flux -v)"
+          echo "flux_version=$VERSION" >> $GITHUB_OUTPUT
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
