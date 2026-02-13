@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: home-assistant
-          image: ghcr.io/home-assistant/home-assistant:2026.2.1 # {"$imagepolicy": "home-assistant:home-assistant"}
+          image: ghcr.io/home-assistant/home-assistant:2026.2.2 # {"$imagepolicy": "home-assistant:home-assistant"}
           ports:
             - name: http
               containerPort: 8123
