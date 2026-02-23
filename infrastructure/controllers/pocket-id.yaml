@@ -43,7 +43,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: pocket-id
-          image: ghcr.io/pocket-id/pocket-id:v2.2.0 # {"$imagepolicy": "pocket-id:pocket-id"}
+          image: ghcr.io/pocket-id/pocket-id:v2.3.0 # {"$imagepolicy": "pocket-id:pocket-id"}
           ports:
             - name: http
               containerPort: 1411
