@@ -47,20 +47,39 @@ spec:
           enabled: true
           name: Pocket ID
           scopes: openid profile email groups
-          auth_url: https://pocket-id.southcity.dev/authorize
-          token_url: https://pocket-id.southcity.dev/api/oidc/token
-          api_url: https://pocket-id.southcity.dev/api/oidc/userinfo
+          client_id: ${CLIENT_ID}
+          client_secret: ${CLIENT_SECRET}
+          auth_url: ${AUTH_URL}
+          token_url: ${TOKEN_URL}
+          api_url: ${API_URL}
+          signout_redirect_url: ${SIGNOUT_REDIRECT_URL}
           use_pkce: true
           allow_sign_up: true
-          role_attribute_path: contains(groups[*], 'admins') && 'Admin' || contains(groups[*], 'users') && 'Editor' || 'Viewer'
+          role_attribute_path: contains(groups[*], 'grafana-admins') && 'Admin' || contains(groups[*], 'grafana-editors') && 'Editor' || 'Viewer'
         panels:
           disable_sanitize_html: true
       envValueFrom:
-        GF_AUTH_GENERIC_OAUTH_CLIENT_ID:
+        CLIENT_ID:
           secretKeyRef:
-            name: grafana-oidc
+            name: grafana-oidc-credentials
             key: client_id
-        GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
+        CLIENT_SECRET:
           secretKeyRef:
-            name: grafana-oidc
+            name: grafana-oidc-credentials
             key: client_secret
+        AUTH_URL:
+          secretKeyRef:
+            name: grafana-oidc-credentials
+            key: authorization_url
+        TOKEN_URL:
+          secretKeyRef:
+            name: grafana-oidc-credentials
+            key: token_url
+        API_URL:
+          secretKeyRef:
+            name: grafana-oidc-credentials
+            key: userinfo_url
+        SINGOUT_REDIRECT_URL:
+          secretKeyRef:
+            name: grafana-oidc-credentials
+            key: end_session_url
