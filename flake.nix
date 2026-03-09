@@ -60,6 +60,7 @@
               pkgs.k9s
               pkgs.kubectl
               pkgs.kubernetes-helm
+              pkgs.oras
               pkgs.sops
               pkgs.talosctl
             ];
