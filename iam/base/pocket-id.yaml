@@ -23,15 +23,11 @@ spec:
     name: pocket-id-operator
   values:
     metrics:
-      enabled: true
+      enabled: false
       serviceMonitor:
-        enabled: true
-        additionalLabels:
-          release: kube-prometheus-stack
+        enabled: false
       prometheusRule:
         enabled: false
-      dashboards:
-        enabled: true
     instance:
       spec:
         encryptionKey:
