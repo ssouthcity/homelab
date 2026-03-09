@@ -79,7 +79,7 @@ spec:
           secretKeyRef:
             name: grafana-oidc-credentials
             key: userinfo_url
-        SINGOUT_REDIRECT_URL:
+        SIGNOUT_REDIRECT_URL:
           secretKeyRef:
             name: grafana-oidc-credentials
             key: end_session_url
