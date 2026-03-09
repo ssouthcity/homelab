@@ -22,6 +22,16 @@ spec:
     kind: OCIRepository
     name: pocket-id-operator
   values:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        additionalLabels:
+          release: kube-prometheus-stack
+      prometheusRule:
+        enabled: false
+      dashboards:
+        enabled: true
     instance:
       spec:
         encryptionKey:
@@ -33,6 +43,13 @@ spec:
         route:
           enabled: true
           name: pocket-id-operator
+          annotations:
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: PocketID
+            gethomepage.dev/group: Cluster Management
+            gethomepage.dev/description: Authentication IDP
+            gethomepage.dev/icon: pocket-id.png
+            gethomepage.dev/pod-selector: ""
           parentRefs:
             - group: gateway.networking.k8s.io
               kind: Gateway
