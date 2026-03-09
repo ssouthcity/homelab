@@ -35,7 +35,7 @@ spec:
             secretKeyRef:
               name: pocket-id-encryption-key
               key: encryption-key
-        appUrl: "https://pocket-id-operator.southcity.dev"
+        appUrl: "https://pocket-id.southcity.dev"
         route:
           enabled: true
           name: pocket-id-operator

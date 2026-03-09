@@ -8,9 +8,6 @@ resources:
   - kgateway.yaml
   - longhorn.yaml
   - metallb.yaml
-  - pocket-id-encryption.enc.yaml
-  - pocket-id-image.yaml
-  - pocket-id.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
