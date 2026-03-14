@@ -23,7 +23,7 @@ spec:
       enabled: true
       parentRefs:
         - name: http
-          namespace: kgateway-system
+          namespace: gateway-system
       hostnames:
         - "longhorn.southcity.dev"
       annotations:

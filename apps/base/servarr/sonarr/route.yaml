@@ -12,7 +12,7 @@ metadata:
 spec:
   parentRefs:
     - name: http
-      namespace: kgateway-system
+      namespace: gateway-system
   hostnames:
     - "sonarr.southcity.dev"
   rules:
