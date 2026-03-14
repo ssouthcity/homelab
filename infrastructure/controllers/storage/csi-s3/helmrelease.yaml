@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: csi-s3
+spec:
+  releaseName: csi-s3
+  interval: 30m
+  chart:
+    spec:
+      chart: csi-s3
+      version: ~0
+      sourceRef:
+        kind: HelmRepository
+        name: yandex-s3
+  valuesFrom:
+    - kind: Secret
+      name: csi-s3
