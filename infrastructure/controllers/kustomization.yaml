@@ -1,34 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - cert-manager.yaml
-  - csi-s3.yaml
-  - external-dns.yaml
-  - external-dns-image.yaml
-  - kgateway.yaml
-  - longhorn.yaml
-  - metallb.yaml
-generatorOptions:
-  disableNameSuffixHash: true
-configMapGenerator:
-  - name: dashboards
-    namespace: cert-manager
-    options:
-      labels:
-        grafana_dashboard: "1"
-    files:
-      - ./dashboards/cert-manager.json
-  - name: dashboards
-    namespace: metallb
-    options:
-      labels:
-        grafana_dashboard: "1"
-    files:
-      - ./dashboards/metallb.json
-  - name: dashboards
-    namespace: longhorn-system
-    options:
-      labels:
-        grafana_dashboard: "1"
-    files:
-      - ./dashboards/longhorn.json
+  - ./identity/pocket-id
+  - ./network/cert-manager/
+  - ./network/external-dns/
+  - ./network/gateway-api/
+  - ./network/kgateway/
+  - ./network/metallb/
+  - ./observability
+  - ./security/kubelet-serving-cert-approver
+  - ./storage/csi-s3
+  - ./storage/longhorn

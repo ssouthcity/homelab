@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager
+spec:
+  releaseName: cert-manager
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: cert-manager
+  values:
+    crds:
+      enabled: true
+    config:
+      apiVersion: controller.config.cert-manager.io/v1alpha1
+      kind: ControllerConfiguration
+      enableGatewayAPI: true
+    prometheus:
+      enabled: true
+      servicemonitor:
+        enabled: true
+        labels:
+          release: kube-prometheus-stack

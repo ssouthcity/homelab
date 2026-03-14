@@ -1,0 +1,41 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: external-dns
+spec:
+  image: registry.k8s.io/external-dns/external-dns
+  interval: 5h
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: external-dns
+spec:
+  imageRepositoryRef:
+    name: external-dns
+  policy:
+    semver:
+      range: ~0
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: default
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: |
+        chore(external-dns): update image versions to {{ range .Changed.Changes }}{{ .NewValue }} {{ end }}
+    push:
+      branch: chore/image-update-automation-external-dns

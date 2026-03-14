@@ -1,0 +1,40 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pocket-id-operator
+spec:
+  releaseName: pocket-id-operator
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: pocket-id-operator
+  values:
+    metrics:
+      enabled: false
+      serviceMonitor:
+        enabled: false
+      prometheusRule:
+        enabled: false
+    instance:
+      spec:
+        encryptionKey:
+          valueFrom:
+            secretKeyRef:
+              name: pocket-id-encryption-key
+              key: encryption-key
+        appUrl: "https://pocket-id.southcity.dev"
+        route:
+          enabled: true
+          name: pocket-id-operator
+          annotations:
+            gethomepage.dev/enabled: "true"
+            gethomepage.dev/name: PocketID
+            gethomepage.dev/group: Cluster Management
+            gethomepage.dev/description: Authentication IDP
+            gethomepage.dev/icon: pocket-id.png
+            gethomepage.dev/pod-selector: ""
+          parentRefs:
+            - group: gateway.networking.k8s.io
+              kind: Gateway
+              name: http
+              namespace: kgateway-system
