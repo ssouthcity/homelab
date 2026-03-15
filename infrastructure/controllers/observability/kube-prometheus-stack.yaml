@@ -22,6 +22,9 @@ spec:
         name: prometheus-community
   values:
     grafana:
+      annotations:
+        reloader.stakater.com/auto: "true"
+      envFromSecret: grafana-oidc-credentials
       route:
         main:
           enabled: true
@@ -47,39 +50,14 @@ spec:
           enabled: true
           name: Pocket ID
           scopes: openid profile email groups
-          client_id: ${CLIENT_ID}
-          client_secret: ${CLIENT_SECRET}
-          auth_url: ${AUTH_URL}
-          token_url: ${TOKEN_URL}
-          api_url: ${API_URL}
-          signout_redirect_url: ${SIGNOUT_REDIRECT_URL}
+          client_id: ${client_id}
+          client_secret: ${client_secret}
+          auth_url: ${authorization_url}
+          token_url: ${token_url}
+          api_url: ${userinfo_url}
+          signout_redirect_url: ${end_session_url}
           use_pkce: true
           allow_sign_up: true
           role_attribute_path: contains(groups[*], 'grafana-admins') && 'Admin' || contains(groups[*], 'grafana-editors') && 'Editor' || 'Viewer'
         panels:
           disable_sanitize_html: true
-      envValueFrom:
-        CLIENT_ID:
-          secretKeyRef:
-            name: grafana-oidc-credentials
-            key: client_id
-        CLIENT_SECRET:
-          secretKeyRef:
-            name: grafana-oidc-credentials
-            key: client_secret
-        AUTH_URL:
-          secretKeyRef:
-            name: grafana-oidc-credentials
-            key: authorization_url
-        TOKEN_URL:
-          secretKeyRef:
-            name: grafana-oidc-credentials
-            key: token_url
-        API_URL:
-          secretKeyRef:
-            name: grafana-oidc-credentials
-            key: userinfo_url
-        SIGNOUT_REDIRECT_URL:
-          secretKeyRef:
-            name: grafana-oidc-credentials
-            key: end_session_url
