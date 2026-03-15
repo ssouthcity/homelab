@@ -1,0 +1,11 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: reloader
+spec:
+  interval: 30m
+  releaseName: reloader
+  chartRef:
+    kind: OCIRepository
+    name: reloader
+  values: {}
