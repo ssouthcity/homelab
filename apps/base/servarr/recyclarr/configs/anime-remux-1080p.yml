@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://schemas.recyclarr.dev/v8/config-schema.json
+sonarr:
+  sonarr-anime-remux-1080p:
+    base_url: http://sonarr.servarr:8989
+    api_key: !env_var SONARR_API_KEY
+    quality_definition:
+      type: anime
+    delete_old_custom_formats: true
+    media_naming:
+      series: jellyfin-tvdb
+      episodes:
+        rename: true
+    quality_profiles:
+      - trash_id: 20e0fc959f1f1704bed501f23bdae76f # [Anime] Remux-1080p
+        reset_unmatched_scores:
+          enabled: true

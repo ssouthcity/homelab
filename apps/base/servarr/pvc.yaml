@@ -1,23 +1,38 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: media-share
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 10.0.1.134
+  share: /var/nfs/shared/Media_Server
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+mountOptions:
+  - nfsvers=3
+  - nolock
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: media
 spec:
-  storageClassName: csi-s3
+  storageClassName: media-share
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Mi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: downloads
 spec:
-  storageClassName: csi-s3
+  storageClassName: media-share
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Mi
