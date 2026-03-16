@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recyclarr
+  labels:
+    app: recyclarr
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recyclarr
+  template:
+    metadata:
+      labels:
+        app: recyclarr
+    spec:
+      containers:
+        - name: recyclarr
+          image: ghcr.io/recyclarr/recyclarr:8.3.2 # {"$imagepolicy": "servarr:recyclarr"}
+          env:
+            - name: PUID
+              value: "1000"
+            - name: GUID
+              value: "1000"
+            - name: TZ
+              value: Etc/UTC
+          envFrom:
+            - secretRef:
+                name: recyclarr
+          volumeMounts:
+            - name: recyclarr-configs
+              mountPath: /config/configs
+      volumes:
+        - name: recyclarr-configs
+          configMap:
+            name: recyclarr-configs

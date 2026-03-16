@@ -10,5 +10,6 @@ resources:
   - ./observability
   - ./reloader
   - ./security/kubelet-serving-cert-approver
+  - ./storage/csi-driver-nfs
   - ./storage/csi-s3
   - ./storage/longhorn
