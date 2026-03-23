@@ -24,15 +24,3 @@ spec:
   resources:
     requests:
       storage: 1Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: downloads
-spec:
-  storageClassName: media-share
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Mi

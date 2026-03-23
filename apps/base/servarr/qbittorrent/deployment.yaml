@@ -40,7 +40,8 @@ spec:
           volumeMounts:
             - name: qbittorrent
               mountPath: /config
-            - name: downloads
+            - name: media
+              subPath: torrents
               mountPath: /downloads
         - name: gluetun
           image: qmcgaw/gluetun:v3.41.1 # {"$imagepolicy": "servarr:gluetun"}
@@ -64,6 +65,6 @@ spec:
         - name: qbittorrent
           persistentVolumeClaim:
             claimName: qbittorrent
-        - name: downloads
+        - name: media
           persistentVolumeClaim:
-            claimName: downloads
+            claimName: media
