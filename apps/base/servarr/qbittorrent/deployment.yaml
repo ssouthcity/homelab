@@ -42,7 +42,7 @@ spec:
               mountPath: /config
             - name: media
               subPath: torrents
-              mountPath: /downloads
+              mountPath: /data/torrents
         - name: gluetun
           image: qmcgaw/gluetun:v3.41.1 # {"$imagepolicy": "servarr:gluetun"}
           securityContext:
