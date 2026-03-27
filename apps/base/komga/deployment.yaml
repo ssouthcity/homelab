@@ -21,9 +21,16 @@ spec:
             - name: http
               containerPort: 25600
           volumeMounts:
-            - name: data
+            - name: config
+              mountPath: /config
+            - name: media
               mountPath: /data
       volumes:
-        - name: data
+        - name: config
           persistentVolumeClaim:
             claimName: komga
+        - name: media
+          nfs:
+            server: 10.0.1.134
+            path: /var/nfs/shared/Media_Server
+            readOnly: true
