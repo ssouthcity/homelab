@@ -37,5 +37,6 @@ spec:
           persistentVolumeClaim:
             claimName: sonarr
         - name: media
-          persistentVolumeClaim:
-            claimName: media
+          nfs:
+            server: 10.0.1.134
+            path: /var/nfs/shared/Media_Server
