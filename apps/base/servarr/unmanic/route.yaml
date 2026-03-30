@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: unmanic
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Unmanic
+    gethomepage.dev/group: Media Server
+    gethomepage.dev/description: Library Optimizer
+    gethomepage.dev/icon: unmanic.png
+    gethomepage.dev/pod-selector: "app.kubernetes.io/instance=unmanic"
+spec:
+  parentRefs:
+    - name: http
+      namespace: gateway-system
+  hostnames:
+    - "unmanic.southcity.dev"
+  rules:
+    - backendRefs:
+        - name: unmanic
+          port: 8888
