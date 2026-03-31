@@ -24,7 +24,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: homepage
-          image: "ghcr.io/gethomepage/homepage:v1.12.1" # {"$imagepolicy": "homepage:homepage"}
+          image: "ghcr.io/gethomepage/homepage:v1.12.2" # {"$imagepolicy": "homepage:homepage"}
           imagePullPolicy: Always
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
