@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: jellyfin
+    strategy:
+      type: Recreate
     spec:
       containers:
         - name: jellyfin

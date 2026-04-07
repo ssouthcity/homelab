@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: home-assistant
+    strategy:
+      type: Recreate
     spec:
       containers:
         - name: home-assistant
