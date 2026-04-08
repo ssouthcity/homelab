@@ -1,0 +1,16 @@
+apiVersion: pocketid.internal/v1alpha1
+kind: PocketIDOIDCClient
+metadata:
+  name: lakekeeper
+spec:
+  name: Lakekeeper
+  launchUrl: "https://lakekeeper.southcity.dev"
+  logoUrl: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/lakekeeper.svg"
+  allowedUserGroups:
+    - name: lakekeeper-viewers
+---
+apiVersion: pocketid.internal/v1alpha1
+kind: PocketIDUserGroup
+metadata:
+  name: lakekeeper-viewers
+spec: {}
