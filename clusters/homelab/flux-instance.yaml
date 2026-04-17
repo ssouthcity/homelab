@@ -20,8 +20,8 @@ spec:
     networkPolicy: true
     domain: "cluster.local"
   sync:
-    kind: GitRepository
-    url: "ssh://git@github.com/ssouthcity/homelab.git"
-    ref: "refs/heads/main"
+    kind: OCIRepository
+    url: "oci://ghcr.io/ssouthcity/homelab/manifests"
+    ref: "latest"
     path: "clusters/homelab"
     pullSecret: "flux-system"

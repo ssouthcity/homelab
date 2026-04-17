@@ -1,0 +1,30 @@
+name: publish-artifact
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+permissions:
+  packages: write
+jobs:
+  flux-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Flux CLI
+        uses: fluxcd/flux2/action@main
+      - name: Push immutable artifact
+        run: |
+          flux push artifact \
+            oci://ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD) \
+            --source="$(git config --get remote.origin.url)" \
+            --revision="$(git branch --show-current)@sha1:$(git rev-parse HEAD)" \
+            --creds flux:${{ secrets.GITHUB_TOKEN }} \
+            --path="./"
+      - name: Tag artifact as latest
+        run: |
+          flux tag artifact \
+            oci://ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD) \
+            --creds flux:${{ secrets.GITHUB_TOKEN }} \
+            --tag latest

@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: infra-configs
   sourceRef:
-    kind: GitRepository
+    kind: OCIRepository
     name: flux-system
   path: ./apps/homelab
   prune: true
