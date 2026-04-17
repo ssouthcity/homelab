@@ -57,6 +57,8 @@
             packages = [ 
               pkgs.age
               pkgs.fluxcd
+              pkgs.fluxcd-operator
+              pkgs.fluxcd-operator-mcp
               pkgs.k9s
               pkgs.kubectl
               pkgs.kubernetes-helm
