@@ -42,4 +42,4 @@ jobs:
       - name: Sign artifact
         run: |
           cosign sign \
-            ghcr.io/${{ github.repository }}/manifests@{{ steps.push.outputs.digest }}
+            ghcr.io/${{ github.repository }}/manifests@${{ steps.push.outputs.digest }}
