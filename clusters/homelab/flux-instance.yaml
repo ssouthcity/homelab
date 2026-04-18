@@ -25,3 +25,15 @@ spec:
     ref: "latest"
     path: "clusters/homelab"
     pullSecret: "flux-system"
+  kustomize:
+    patches:
+      - patch: |
+          - op: add
+            path: /spec/verify
+            value:
+              provider: cosign
+              matchOIDCIdentity:
+                - issuer: "^https://token\.actions\.githubusercontent\.com$"
+                  subject: "^https://github\.com/ssouthcity/homelab/\.github/workflows/publish-artifact\.yml@refs/heads/main$"
+        target:
+          kind: OCIRepository

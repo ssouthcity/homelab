@@ -6,14 +6,17 @@ on:
       - "main"
 permissions:
   packages: write
+  id-token: write
 jobs:
   flux-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup Flux CLI
-        uses: fluxcd/flux2/action@main
+        uses: fluxcd/flux2/action@5adad89dcce7b79f20274ae8e112bcec7bd46764 # v2.8.5
+      - name: Setup Cosign
+        uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
       - name: Push immutable artifact
         run: |
           flux push artifact \
@@ -28,3 +31,9 @@ jobs:
             oci://ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD) \
             --creds flux:${{ secrets.GITHUB_TOKEN }} \
             --tag latest
+      - name: Sign artifact
+        run: |
+          cosign sign \
+            ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD) \
+              --registry-username=${{ github.actor }} \
+              --registry-password=${{ secrets.GITHUB_TOKEN }}
