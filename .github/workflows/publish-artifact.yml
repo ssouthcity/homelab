@@ -6,6 +6,7 @@ on:
       - "main"
 permissions:
   packages: write
+  id-token: write
 jobs:
   flux-push:
     runs-on: ubuntu-latest
@@ -33,5 +34,4 @@ jobs:
       - name: Sign artifact
         run: |
           cosign sign \
-            ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD) \
-            --yes
+            ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD)
