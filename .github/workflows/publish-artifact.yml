@@ -33,4 +33,5 @@ jobs:
       - name: Sign artifact
         run: |
           cosign sign \
-            ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD)
+            ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD) \
+            --yes
