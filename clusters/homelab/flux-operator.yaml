@@ -32,3 +32,20 @@ spec:
         chartRef:
           kind: OCIRepository
           name: << inputs.provider.name >>
+      values:
+        web:
+          enabled: true
+          httpRoute:
+            enabled: true
+            annotations:
+              gethomepage.dev/enabled: "true"
+              gethomepage.dev/name: Flux Operator
+              gethomepage.dev/group: Kubernetes
+              gethomepage.dev/description: FluxCD Kubernetes Operator
+              gethomepage.dev/icon: flux-operator.svg
+              gethomepage.dev/pod-selector: ""
+            hostnames:
+              - "flux.southcity.dev"
+            parentRefs:
+              - name: http
+                namespace: gateway-system
