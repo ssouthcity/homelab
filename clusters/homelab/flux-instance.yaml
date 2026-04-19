@@ -37,3 +37,12 @@ spec:
                   subject: ^https://github\.com/ssouthcity/homelab/\.github/workflows/publish-artifact\.yml@refs/heads/main$
         target:
           kind: OCIRepository
+      - patch: |
+          - op: add
+            path: /spec/decryption
+            value:
+              provider: sops
+              secretRef:
+                name: sops-age
+        target:
+          kind: Kustomization
