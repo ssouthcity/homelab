@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: qbittorrent
-          image: lscr.io/linuxserver/qbittorrent:5.1.4 # {"$imagepolicy": "servarr:qbittorrent"}
+          image: lscr.io/linuxserver/qbittorrent:5.1.4
           env:
             - name: PUID
               value: "1000"
@@ -43,7 +43,7 @@ spec:
             - name: media
               mountPath: /data/torrents
         - name: gluetun
-          image: qmcgaw/gluetun:v3.41.1 # {"$imagepolicy": "servarr:gluetun"}
+          image: qmcgaw/gluetun:v3.41.1
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]

@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: homepage
 resources:
   - deployment.yaml
-  - image.yaml
   - namespace.yaml
   - route.yaml
   - service-account.yaml

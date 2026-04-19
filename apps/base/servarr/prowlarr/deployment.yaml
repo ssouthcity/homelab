@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: prowlarr
-          image: lscr.io/linuxserver/prowlarr:2.3.5 # {"$imagepolicy": "servarr:prowlarr"}
+          image: lscr.io/linuxserver/prowlarr:2.3.5
           env:
             - name: PUID
               value: "1000"

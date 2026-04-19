@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: external-dns
 resources:
   - deployment.yaml
-  - imagerepository.yaml
   - namespace.yaml
   - secret.enc.yaml
   - serviceaccount.yaml

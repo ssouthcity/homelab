@@ -5,6 +5,5 @@ resources:
   - namespace.yaml
   - volume.yaml
   - deployment.yaml
-  - image.yaml
   - service.yaml
   - route.yaml
