@@ -159,10 +159,6 @@ spec:
   prune: true
   wait: true
   timeout: 5m0s
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
 ```
 
 ## Common Tasks
