@@ -27,28 +27,29 @@ jobs:
       - name: Push immutable artifact
         id: push
         run: |
-          digest=$(flux push artifact \
+          output=$(flux push artifact \
             oci://ghcr.io/$REPOSITORY/manifests:$(git rev-parse --short HEAD) \
             --source="$(git config --get remote.origin.url)" \
             --revision="$(git branch --show-current)@sha1:$(git rev-parse HEAD)" \
             --path="./" \
-            --output=json | jq -r '.digest')
+            --output=json)
 
+          digest=$(echo $output | jq -r '.digest')
+          echo "digest: $digest"
           echo "digest=$digest" >> $GITHUB_OUTPUT
+
+          digest_url=$(echo $output | jq -r '. | .repository + "@" + .digest')
+          echo "digest_url: $digest_url"
+          echo "digest_url=$digest_url" >> $GITHUB_OUTPUT
         env:
           REPOSITORY: ${{ github.repository }}
       - name: Tag artifact as latest
         run: |
-          flux tag artifact \
-            oci://ghcr.io/$REPOSITORY/manifests@$DIGEST \
-            --tag latest
+          flux tag artifact oci://$DIGEST_URL --tag latest
         env:
-          REPOSITORY: ${{ github.repository }}
-          DIGEST: ${{ steps.push.outputs.digest }}
+          DIGEST_URL: ${{ steps.push.outputs.digest_url }}
       - name: Sign artifact
         run: |
-          cosign sign ghcr.io/$REPOSITORY/manifests@$DIGEST
-          cosign sign ghcr.io/$REPOSITORY/manifests:latest
+          cosign sign $DIGEST_URL
         env:
-          REPOSITORY: ${{ github.repository }}
-          DIGEST: ${{ steps.push.outputs.digest }}
+          DIGEST_URL: ${{ steps.push.outputs.digest_url }}
