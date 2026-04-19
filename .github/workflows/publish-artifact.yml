@@ -5,6 +5,7 @@ on:
     branches:
       - "main"
 permissions:
+  contents: read
   packages: write
   id-token: write
 jobs:
@@ -27,19 +28,26 @@ jobs:
         id: push
         run: |
           digest=$(flux push artifact \
-            oci://ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD) \
+            oci://ghcr.io/$REPOSITORY/manifests:$(git rev-parse --short HEAD) \
             --source="$(git config --get remote.origin.url)" \
             --revision="$(git branch --show-current)@sha1:$(git rev-parse HEAD)" \
             --path="./" \
             --output=json | jq -r '.digest')
 
           echo "digest=$digest" >> $GITHUB_OUTPUT
+        env:
+          REPOSITORY: ${{ github.repository }}
       - name: Tag artifact as latest
         run: |
           flux tag artifact \
-            oci://ghcr.io/${{ github.repository }}/manifests:$(git rev-parse --short HEAD) \
+            oci://ghcr.io/$REPOSITORY/manifests@$DIGEST \
             --tag latest
+        env:
+          REPOSITORY: ${{ github.repository }}
+          DIGEST: ${{ steps.push.outputs.digest }}
       - name: Sign artifact
         run: |
-          cosign sign \
-            ghcr.io/${{ github.repository }}/manifests@${{ steps.push.outputs.digest }}
+          cosign sign ghcr.io/$REPOSITORY/manifests@$DIGEST
+        env:
+          REPOSITORY: ${{ github.repository }}
+          DIGEST: ${{ steps.push.outputs.digest }}
