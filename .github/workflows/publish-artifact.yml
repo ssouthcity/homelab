@@ -38,16 +38,22 @@ jobs:
         env:
           REPOSITORY: ${{ github.repository }}
       - name: Tag artifact as latest
+        id: tag-latest
         run: |
-          flux tag artifact \
+          digest=(flux tag artifact \
             oci://ghcr.io/$REPOSITORY/manifests@$DIGEST \
-            --tag latest
+            --tag latest \
+            --output=json | jq -r '.digest')
+
+          echo "digest=$digest" >> $GITHUB_OUTPUT
         env:
           REPOSITORY: ${{ github.repository }}
           DIGEST: ${{ steps.push.outputs.digest }}
       - name: Sign artifact
         run: |
           cosign sign ghcr.io/$REPOSITORY/manifests@$DIGEST
+          cosign sign ghcr.io/$REPOSITORY/manifests@$LATEST_DIGEST
         env:
           REPOSITORY: ${{ github.repository }}
           DIGEST: ${{ steps.push.outputs.digest }}
+          LATEST_DIGEST: ${{ steps.tag-latest.outputs.digest }}
