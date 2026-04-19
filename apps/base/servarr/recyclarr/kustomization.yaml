@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: servarr
 resources:
   - deployment.yaml
-  - image.yaml
   - secret.enc.yaml
 configMapGenerator:
   - name: recyclarr-configs

@@ -4,7 +4,6 @@ namespace: blocky
 resources:
   - config.yaml
   - deployment.yaml
-  - image.yaml
   - monitoring.yaml
   - namespace.yaml
   - service.yaml

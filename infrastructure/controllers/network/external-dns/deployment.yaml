@@ -20,7 +20,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: external-dns
-          image: registry.k8s.io/external-dns/external-dns:v0.21.0 # {"$imagepolicy": "external-dns:external-dns"}
+          image: registry.k8s.io/external-dns/external-dns:v0.21.0
           args:
             - --source=gateway-httproute
             - --log-level=debug
