@@ -1,0 +1,22 @@
+apiVersion: pocketid.internal/v1alpha1
+kind: PocketIDInstance
+metadata:
+  name: pocket-id
+  namespace: pocket-id-system
+spec:
+  appUrl: "https://pocket-id.southcity.dev"
+  encryptionKey:
+    valueFrom:
+      secretKeyRef:
+        name: pocket-id-encryption-key
+        key: encryption-key
+  persistence:
+    enabled: true
+  route:
+    enabled: true
+    name: pocket-id
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: Gateway
+        name: http
+        namespace: gateway-system
