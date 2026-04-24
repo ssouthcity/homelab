@@ -1,3 +1,8 @@
+[![Dependabot Updates](https://github.com/ssouthcity/homelab/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/ssouthcity/homelab/actions/workflows/dependabot/dependabot-updates)
+[![Publish Artifacts](https://github.com/ssouthcity/homelab/actions/workflows/publish-artifacts.yml/badge.svg)](https://github.com/ssouthcity/homelab/actions/workflows/publish-artifacts.yml)
+
+---
+
 # Homelab
 
 <p align="center">
