@@ -37,7 +37,7 @@ jobs:
           path: "./components/${{ matrix.component }}"
           diff-tag: latest
       - name: Sign artifact
-        if: steps.push.outputs.pushed == "true"
+        if: steps.push.outputs.pushed == 'true'
         run: cosign sign --yes $DIGEST_URL
         env:
           DIGEST_URL: ${{ steps.push.outputs.digest-url }}
