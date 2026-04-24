@@ -1,8 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: pocket-id
 resources:
-  - helmrelease.yaml
-  - namespace.yaml
-  - ocirepository.yaml
+  - ../base
   - pocket-id-secret.enc.yaml

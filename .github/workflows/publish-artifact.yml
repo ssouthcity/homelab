@@ -9,6 +9,38 @@ permissions:
   packages: write
   id-token: write
 jobs:
+  publish-artifacts:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        component:
+          - pocket-id
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Setup Flux CLI
+        uses: fluxcd/flux2/action@5adad89dcce7b79f20274ae8e112bcec7bd46764 # v2.8.5
+      - name: Setup Cosign
+        uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
+      - name: Login to Github Container Registry
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push artifact
+        uses: controlplaneio-fluxcd/distribution/actions/push@005d2772c072c7eed298265d32ad5d01941cfb2f
+        id: push
+        with:
+          repository: ghcr.io/${{ github.repository }}/${{ matrix.component }}
+          path: "./components/${{ matrix.component }}"
+          diff-tag: latest
+      - name: Sign artifact
+        if: steps.push.outputs.pushed == 'true'
+        run: cosign sign --yes $DIGEST_URL
+        env:
+          DIGEST_URL: ${{ steps.push.outputs.digest-url }}
   flux-push:
     runs-on: ubuntu-latest
     steps:
