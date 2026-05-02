@@ -60,6 +60,7 @@
               pkgs.fluxcd-operator
               pkgs.fluxcd-operator-mcp
               pkgs.k9s
+              pkgs.kind
               pkgs.kubectl
               pkgs.kubernetes-helm
               pkgs.oras

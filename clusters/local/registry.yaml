@@ -1,0 +1,11 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSetInputProvider
+metadata:
+  name: registry
+  namespace: flux-system
+spec:
+  type: Static
+  defaultValues:
+    repository: "flux-registry:5000"
+    tag: "local"
+    insecure: true
