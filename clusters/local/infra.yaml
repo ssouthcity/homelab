@@ -1,0 +1,40 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: infra
+  namespace: flux-system
+spec:
+  inputsFrom:
+    - kind: ResourceSetInputProvider
+      name: registry
+  resources:
+    - apiVersion: source.toolkit.fluxcd.io/v1
+      kind: OCIRepository
+      metadata:
+        name: infra-source
+        namespace: << inputs.provider.namespace >>
+      spec:
+        interval: 1m
+        insecure: << inputs.insecure >>
+        url: "oci://<< inputs.repository >>/flux-infra-sync"
+        ref:
+          tag: << inputs.tag | quote >>
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      metadata:
+        name: infra-sync
+        namespace: << inputs.provider.namespace >>
+      spec:
+        interval: 1h
+        retryInterval: 2m
+        timeout: 5m
+        path: ./
+        prune: true
+        wait: true
+        sourceRef:
+          kind: OCIRepository
+          name: infra-source
+        healthCheckExprs:
+          - apiVersion: fluxcd.controlplane.io/v1
+            kind: ResourceSet
+            current: status.conditions.filter(c, c.type == 'Ready').all(c, c.status == 'True' && c.observedGeneration == metadata.generation)
