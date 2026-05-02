@@ -31,6 +31,13 @@ spec:
         - kind: ServiceAccount
           name: flux
           namespace: << inputs.tenant >>
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        name: sops-age
+        namespace: << inputs.tenant >>
+        annotations:
+          fluxcd.controlplane.io/copyFrom: "flux-system/sops-age"
     - apiVersion: source.toolkit.fluxcd.io/v1
       kind: OCIRepository
       metadata:
