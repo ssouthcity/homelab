@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup Flux CLI
-        uses: controlplaneio-fluxcd/distribution/actions/setup@3f1c0eb61da5f5249ca311b067d17347cd02bc51 # v2.8.6
+        uses: controlplaneio-fluxcd/distribution/actions/setup@d055f6e0af475f179ab084bca4ab1896b47f18b6 # v2.8.8
       - name: Setup Cosign
         uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
       - name: Login to Github Container Registry
@@ -30,7 +30,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Push artifact
-        uses: controlplaneio-fluxcd/distribution/actions/push@3f1c0eb61da5f5249ca311b067d17347cd02bc51 # v2.8.6
+        uses: controlplaneio-fluxcd/distribution/actions/push@d055f6e0af475f179ab084bca4ab1896b47f18b6 # v2.8.8
         id: push
         with:
           repository: ghcr.io/${{ github.repository }}/${{ matrix.component }}
@@ -47,7 +47,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup Flux CLI
-        uses: controlplaneio-fluxcd/distribution/actions/setup@3f1c0eb61da5f5249ca311b067d17347cd02bc51 # v2.8.6
+        uses: controlplaneio-fluxcd/distribution/actions/setup@d055f6e0af475f179ab084bca4ab1896b47f18b6 # v2.8.8
       - name: Setup Cosign
         uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
       - name: Login to Github Container Registry
