@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup Flux Mirror CLI
-        uses: fluxcd/flux-mirror/actions/setup@d9904a01d22daa98188250b5e8dbc9a45857aae6 # v0.0.2
+        uses: fluxcd/flux-mirror/actions/setup@46c4cc591c2610e983a62876e57dcf4bf0098c69 # v0.5.0
       - name: Login to Github Container Registry
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
         with:
