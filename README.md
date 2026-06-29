@@ -5,6 +5,18 @@
 
 # Homelab
 
+> [!IMPORTANT]
+> **This repository has moved!**
+>
+> Development has migrated to:
+>
+>   * [homelab-fleet](https://github.com/ssouthcity/homelab-fleet)
+>   * [homelab-infra](https://github.com/ssouthcity/homelab-infra)
+>   * [homelab-apps](https://github.com/ssouthcity/homelab-apps)
+>   * [charts](https://github.com/ssouthcity/charts)
+>
+> This repo will no longer receive updates.
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubernetes/icon/color/kubernetes-icon-color.svg" width="80" />
   <img src="https://www.vectorlogo.zone/logos/fluxcdio/fluxcdio-icon.svg" width="80" />
