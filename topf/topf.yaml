@@ -1,0 +1,29 @@
+clusterName: homelab-prod
+clusterEndpoint: https://homelab.southcity.dev:6443
+kubernetesVersion: 1.36.1
+
+talosVersion: v1.13.6
+schematicId: "@schematic.yaml"
+factory: factory.talos.dev
+platform: nocloud
+secureboot: true
+
+nodes:
+  - host: homelab-talos-control-1
+    ip: 10.0.30.136
+    role: control-plane
+  - host: homelab-talos-control-2
+    ip: 10.0.30.147
+    role: control-plane
+  - host: homelab-talos-control-3
+    ip: 10.0.30.200
+    role: control-plane
+  - host: homelab-talos-worker-1
+    ip: 10.0.30.33
+    role: worker
+  - host: homelab-talos-worker-2
+    ip: 10.0.30.118
+    role: worker
+  - host: homelab-talos-worker-3
+    ip: 10.0.30.119
+    role: worker
