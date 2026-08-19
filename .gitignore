@@ -1,7 +1,0 @@
-# Nix Direnv
-.direnv
-.envrc
-.env
-
-# Generated files
-.pre-commit-config.yaml 
